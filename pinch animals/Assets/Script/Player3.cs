@@ -15,10 +15,6 @@ public class Player3 : MonoBehaviour
 	public GameObject penchi;
 
 	public Sprite NormalSprite;//待機状態
-	public Sprite WalkSprite1;//歩く状態1
-	public Sprite WalkSprite2;//歩く状態2
-	public Sprite InterposeSprite;//挟む状態
-	public Sprite PulloutSprite;//抜く状態
 
 	public Slider _slider;
 	public float Power;
@@ -28,10 +24,18 @@ public class Player3 : MonoBehaviour
 	public bool Press;
 	public static bool PressPre;
 
-	GameObject obj=null;
-
+	public GameObject obj=null;
 
 	public Rigidbody2D rigid2D;
+
+	public bool kubCheck;
+
+	public int HitPoint;
+	public bool Flag;
+
+	public bool SeimeiFlag;
+
+
 
 	public enum State
 	{
@@ -57,7 +61,7 @@ public class Player3 : MonoBehaviour
 		PressPre = false;
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクトい貼られているリジッドボディへの参照（ポインタ）を取得
 		//関数化をα終了後かβ終了後にする
-
+		kubInit();
 	}
 
 	void Init()
@@ -70,7 +74,32 @@ public class Player3 : MonoBehaviour
 		Press = false;
 		PressPre = false;
 	}
+		
+	void kubInit()
+	{
+		kubCheck = false;
+		Flag=false;
+		SeimeiFlag = true;
+		HitPoint = 3;
+	}
 
+	void kubUpdate ()
+	{
+		//抜けた後数値を初期化出来たら良し
+		//数値が取れた後が問題で1回増減すると残りにも適用される
+		//0にすると失敗の判定を取られるのも注意
+		if (obj != null) 
+		{
+			//GameObject _child = obj.transform.FindChild ().gameObject;
+			if (kubCheck == true && (PowerPre >= 0.5 && PowerPre <= 2.5)) 
+			{
+				kubCheck = false;
+				//_child.GetComponent<CircleCollider2D> ().enabled = true;
+				obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+			
+			}
+		}
+	}
 
 	void Update () 
 	{
@@ -141,7 +170,6 @@ public class Player3 : MonoBehaviour
 			}
 			if (Check == true)
 			{
-
 				if (Input.GetKeyDown (KeyCode.UpArrow)) 
 				{
 					Position.y += SPEED.y + 2;
@@ -153,7 +181,9 @@ public class Player3 : MonoBehaviour
 				}
 			}
 
-			/*		if (Input.GetKeyDown (KeyCode.Space)) 
+			kubUpdate ();
+
+		/*	if (Input.GetKeyDown (KeyCode.Space)) 
 			{
 				if (Press == false) 
 				{
@@ -202,10 +232,15 @@ public class Player3 : MonoBehaviour
 	/// <param name="collider">Collider.変数とか？</param>
 	void OnTriggerStay2D(Collider2D collider)
 	{
-		Check = true;
+		kubCheck = true;
 		if (collider.gameObject.name == "kub") 
 		{
 			obj = collider.gameObject;
 		}
+	}
+
+	void OnTriggerExit2D(Collider2D collider)
+	{
+		obj = null;
 	}
 }
