@@ -51,6 +51,7 @@
      <Compile Include="Assets\ManagerScript\SceneChange.cs" />
      <Compile Include="Assets\ManagerScript\ScoreManager.cs" />
      <Compile Include="Assets\ManagerScript\SingletonMonoBehaviour.cs" />
+     <Compile Include="Assets\Script\BottomSound.cs" />
      <Compile Include="Assets\Script\FlagMgm.cs" />
      <Compile Include="Assets\Script\Junp.cs" />
      <Compile Include="Assets\Script\NewBehaviourScript.cs" />
