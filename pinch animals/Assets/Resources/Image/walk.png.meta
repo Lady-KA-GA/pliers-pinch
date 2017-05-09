@@ -1,0 +1,174 @@
+fileFormatVersion: 2
+guid: 61841ecdf003a49799345c5ec820c6bd
+timeCreated: 1492652571
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: walk_0
+    21300002: walk_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: walk_0
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 115
+        width: 300
+        height: 457
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 150, y: -228.5}
+        - {x: 150, y: -169.5}
+        - {x: 106, y: -83.5}
+        - {x: 145, y: -21.5}
+        - {x: 95, y: 35.5}
+        - {x: -5, y: 199.5}
+        - {x: -27, y: 228.5}
+        - {x: -114, y: 228.5}
+        - {x: -150, y: 219.5}
+        - {x: -150, y: 64.5}
+        - {x: -61, y: 32.5}
+        - {x: -55, y: -83.5}
+        - {x: -62, y: -131.5}
+        - {x: -86, y: -188.5}
+        - {x: -86, y: -218.5}
+        - {x: -80, y: -228.5}
+        - {x: 15, y: -228.5}
+        - {x: 58, y: -166.5}
+        - {x: 77, y: -216.5}
+        - {x: 87, y: -228.5}
+      - - {x: -31, y: 1.5}
+        - {x: -31, y: 0.5}
+        - {x: -28, y: -3.5}
+        - {x: -25, y: -2.5}
+        - {x: -25, y: 2.5}
+        - {x: -27, y: 4.5}
+        - {x: -28, y: 4.5}
+      - - {x: -36, y: 24.5}
+        - {x: -34, y: 22.5}
+        - {x: -31, y: 23.5}
+        - {x: -31, y: 26.5}
+        - {x: -33, y: 28.5}
+        - {x: -36, y: 27.5}
+    - name: walk_1
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 115
+        width: 300
+        height: 457
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27, y: 228.5}
+        - {x: -100, y: 228.5}
+        - {x: -150, y: 213.5}
+        - {x: -150, y: 89.5}
+        - {x: -100, y: 33.5}
+        - {x: -44, y: -13.5}
+        - {x: -17, y: -21.5}
+        - {x: -5, y: -22.5}
+        - {x: 1, y: -22.5}
+        - {x: -7, y: -22.5}
+        - {x: -12, y: -24.5}
+        - {x: -18, y: -29.5}
+        - {x: -64, y: -79.5}
+        - {x: -92, y: -219.5}
+        - {x: -82, y: -228.5}
+        - {x: 150, y: -228.5}
+        - {x: 150, y: -28.5}
+        - {x: 148, y: -2.5}
+      - - {x: -69, y: 24.5}
+        - {x: -74, y: 20.5}
+        - {x: -74, y: 16.5}
+        - {x: -67, y: 16.5}
+        - {x: -63, y: 17.5}
+        - {x: -63, y: 21.5}
+        - {x: -64, y: 24.5}
+      - - {x: -47, y: 25.5}
+        - {x: -49, y: 22.5}
+        - {x: -49, y: 19.5}
+        - {x: -45, y: 17.5}
+        - {x: -41, y: 17.5}
+        - {x: -39, y: 18.5}
+        - {x: -39, y: 20.5}
+        - {x: -44, y: 25.5}
+      - - {x: -80, y: 23.5}
+        - {x: -80, y: 21.5}
+        - {x: -78, y: 19.5}
+        - {x: -75, y: 19.5}
+        - {x: -72, y: 22.5}
+        - {x: -73, y: 25.5}
+        - {x: -78, y: 25.5}
+      - - {x: -36, y: 24.5}
+        - {x: -34, y: 22.5}
+        - {x: -31, y: 23.5}
+        - {x: -31, y: 26.5}
+        - {x: -33, y: 28.5}
+        - {x: -36, y: 27.5}
+      - - {x: -85, y: 39.5}
+        - {x: -85, y: 32.5}
+        - {x: -76, y: 32.5}
+        - {x: -74, y: 35.5}
+        - {x: -75, y: 38.5}
+        - {x: -77, y: 39.5}
+      - - {x: -78, y: 53.5}
+        - {x: -81, y: 51.5}
+        - {x: -81, y: 47.5}
+        - {x: -80, y: 46.5}
+        - {x: -67, y: 46.5}
+        - {x: -65, y: 47.5}
+        - {x: -65, y: 49.5}
+        - {x: -67, y: 53.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

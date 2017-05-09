@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: 0c909176ae810493ea4a461085afac58
+timeCreated: 1492656607
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: pench_ani_0
+    21300002: pench_ani_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: pench_ani_0
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 5
+        width: 325
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 162.5, y: -228.5}
+        - {x: 162.5, y: -168.5}
+        - {x: 94.5, y: -15.5}
+        - {x: 62.5, y: 58.5}
+        - {x: 28.5, y: 109.5}
+        - {x: 13.5, y: 203.5}
+        - {x: -7.5, y: 228.5}
+        - {x: -89.5, y: 228.5}
+        - {x: -139.5, y: 211.5}
+        - {x: -139.5, y: 109.5}
+        - {x: -131.5, y: 81.5}
+        - {x: -87.5, y: 49.5}
+        - {x: -66.5, y: 13.5}
+        - {x: -57.5, y: -137.5}
+        - {x: -84.5, y: -220.5}
+        - {x: -71.5, y: -228.5}
+        - {x: 3.5, y: -228.5}
+        - {x: 24.5, y: -99.5}
+        - {x: 82.5, y: -219.5}
+        - {x: 96.5, y: -228.5}
+      - - {x: -162.5, y: -107.5}
+        - {x: -160.5, y: -109.5}
+        - {x: -157.5, y: -107.5}
+        - {x: -158.5, y: -103.5}
+        - {x: -161.5, y: -100.5}
+        - {x: -162.5, y: -100.5}
+      - - {x: 58.5, y: 43.5}
+        - {x: 62.5, y: 38.5}
+        - {x: 65.5, y: 40.5}
+        - {x: 64.5, y: 44.5}
+        - {x: 61.5, y: 46.5}
+        - {x: 59.5, y: 46.5}
+    - name: pench_ani_1
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 5
+        width: 325
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 162.5, y: -228.5}
+        - {x: 162.5, y: -177.5}
+        - {x: 127.5, y: -125.5}
+        - {x: 94.5, y: -15.5}
+        - {x: 41.5, y: 114.5}
+        - {x: 1.5, y: 228.5}
+        - {x: -94.5, y: 228.5}
+        - {x: -134.5, y: 200.5}
+        - {x: -139.5, y: 176.5}
+        - {x: -139.5, y: 109.5}
+        - {x: -131.5, y: 81.5}
+        - {x: -87.5, y: 49.5}
+        - {x: -107.5, y: 40.5}
+        - {x: -139.5, y: -51.5}
+        - {x: -61.5, y: -80.5}
+        - {x: -60.5, y: -138.5}
+        - {x: -81.5, y: -220.5}
+        - {x: -69.5, y: -228.5}
+        - {x: 3.5, y: -228.5}
+        - {x: 24.5, y: -99.5}
+        - {x: 82.5, y: -219.5}
+        - {x: 96.5, y: -228.5}
+      - - {x: -162.5, y: -107.5}
+        - {x: -160.5, y: -109.5}
+        - {x: -157.5, y: -107.5}
+        - {x: -158.5, y: -103.5}
+        - {x: -161.5, y: -100.5}
+        - {x: -162.5, y: -100.5}
+      - - {x: 58.5, y: 43.5}
+        - {x: 62.5, y: 38.5}
+        - {x: 65.5, y: 40.5}
+        - {x: 64.5, y: 44.5}
+        - {x: 61.5, y: 46.5}
+        - {x: 59.5, y: 46.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -31,25 +31,25 @@ public class SceneChange : MonoBehaviour
 				}
 				break;
 			case "stage_select":
-				if (Input.GetMouseButtonDown (0))
+		/*		if (Input.GetMouseButtonDown (0))
 				{
 					ChangeScene();
-				}
+				}*/
 				break;
 			case "stage1":
-				if (Input.GetMouseButtonUp (0))
+				if (Input.GetKeyDown(KeyCode.A))
 				{
 					ChangeScene ();
 				}
 				break;
 			case "stage2":
-				if (Input.GetMouseButtonUp (0))
+				if (Input.GetKeyDown(KeyCode.A))
 				{
 					ChangeScene ();
 				}
 				break;
 			case "stage3":
-				if (Input.GetMouseButtonUp (0))
+				if (Input.GetKeyDown(KeyCode.A))
 				{
 					ChangeScene ();
 				}

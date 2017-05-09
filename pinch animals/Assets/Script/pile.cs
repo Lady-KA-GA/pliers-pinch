@@ -6,23 +6,22 @@ public class pile : MonoBehaviour
 	public GameObject pile_body;
 	public GameObject pile_root;
 	public bool Check;
-	public int HP;
+
+	public float HP;
+	public bool Flag;
 
 	void Start () 
 	{
-		HP = 3;
+		Check = false;
+		Flag=false;
 	}
 
 	void Update () 
 	{
-		if (HP != 0) 
-		{
-			if (Check == true && Input.GetKey("space") &&(Input.GetKeyDown ("left") || Input.GetKeyDown ("right"))) 
-			{
-				HP -= 1;
-			}
-		}
-		if (Check == true && HP == 0 && Input.GetKeyDown ("up")&&Input.GetKey("space")) 
+		HP = Player2.PowerPre;
+		Flag = Player2.PressPre;
+ 
+		if (Check == true && Flag == true && (HP >= 3.5 && HP <= 5.5)) 
 		{
 			Check = false;
 			pile_root.GetComponent<PolygonCollider2D> ().enabled = true;

@@ -7,25 +7,20 @@ public class pole : MonoBehaviour
 	public GameObject pole_root;
 	public bool Check;
 
-	public int HP;
+	public float HP;
+	public bool Flag;
 
 	void Start () 
 	{
-		HP = 3;
 		Check = false;
+		Flag = false;
 	}
 
 	void Update () 
 	{
-		if (HP != 0) 
-		{
-			if(Check == true && Input.GetKey("space") && (Input.GetKeyDown("left")||Input.GetKeyDown("right")))
-			{
-				HP -= 1;
-			}
-		}
-
-		if (Check == true && HP == 0 && Input.GetKeyDown ("up")&&Input.GetKey("space"))
+		HP = Player2.PowerPre;
+		Flag = Player2.PressPre;
+		if(Check == true && Flag==true && (HP >= 6.5 && HP <= 8.5))
 		{
 			Check = false;
 			pole_root.GetComponent<BoxCollider2D> ().enabled = true;

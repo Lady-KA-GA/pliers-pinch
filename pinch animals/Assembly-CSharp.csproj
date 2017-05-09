@@ -56,12 +56,21 @@
      <Compile Include="Assets\Script\NewBehaviourScript.cs" />
      <Compile Include="Assets\Script\Player.cs" />
      <Compile Include="Assets\Script\Player1.cs" />
+     <Compile Include="Assets\Script\Player2.cs" />
      <Compile Include="Assets\Script\Player24.cs" />
+     <Compile Include="Assets\Script\Player3.cs" />
+     <Compile Include="Assets\Script\Pose.cs" />
+     <Compile Include="Assets\Script\PullOut.cs" />
      <Compile Include="Assets\Script\button_function.cs" />
      <Compile Include="Assets\Script\camera.cs" />
      <Compile Include="Assets\Script\child.cs" />
      <Compile Include="Assets\Script\clear.cs" />
+     <Compile Include="Assets\Script\clearflag.cs" />
+     <Compile Include="Assets\Script\gameover.cs" />
+     <Compile Include="Assets\Script\gauge.cs" />
      <Compile Include="Assets\Script\kub.cs" />
+     <Compile Include="Assets\Script\kub2.cs" />
+     <Compile Include="Assets\Script\kub_pile_Flag.cs" />
      <Compile Include="Assets\Script\kusa.cs" />
      <Compile Include="Assets\Script\pile.cs" />
      <Compile Include="Assets\Script\pole.cs" />
@@ -73,6 +82,7 @@
      <Compile Include="Assets\Script\subtest.cs" />
      <Compile Include="Assets\Script\test.cs" />
      <Compile Include="Assets\Script\testMoveManerger.cs" />
+     <Compile Include="Assets\Script\title.cs" />
      <Compile Include="Assets\Script\tree.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>

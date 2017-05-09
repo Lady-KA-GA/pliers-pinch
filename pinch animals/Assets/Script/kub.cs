@@ -7,35 +7,58 @@ public class kub : MonoBehaviour
 	public GameObject kub_root;
 	public bool Check;
 
-	//public bool testcheck;
+	public float HP;
+	public int HitPoint;
+	public bool Flag;
 
-
-
-	//public bool root_on;
+	public bool SeimeiFlag;
 
 	void Start () 
 	{
 		Check = false;
-		//testcheck = false;
+		Flag=false;
+		SeimeiFlag = true;
+		HitPoint = 3;
 	}
 		
+	void Init()
+	{
+		Check = false;
+		Flag=false;
+		SeimeiFlag = true;
+		HitPoint = 3;
+	}
 
 	void Update ()
 	{
-		//testcheck = Player.Flag;
-		if (Check == true && Input.GetKeyDown ("up")&&Input.GetKey("space")) 
+		//抜けた後数値を初期化出来たら良し
+		//数値が取れた後が問題で1回増減すると残りにも適用される
+		//0にすると失敗の判定を取られるのも注意
+		HP = Player24.PowerPre;
+		if (Check == true &&/* Flag == true &&*/ (HP >= 0.5 && HP <= 2.5)) 
 		{
 			Check = false;
 			kub_root.GetComponent<CircleCollider2D> ().enabled = true;
 			kub_body.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 		}
-			
-/*		if(root_on == true)
+
+	/*		if (HitPoint != 0) 
+			{
+				if (Check == true && Flag == true &&(HP <= 0.4 || HP >= 2.6)) 
+				{
+					HitPoint -= 1;
+				}
+			} 
+			else
+			{
+				SeimeiFlag = false;
+			}
+
+		if(SeimeiFlag == false)
 		{
-			kub_body.GetComponent<RigidbodyConstraints2D> () = RigidbodyConstraints2D.FreezePositionX;
+			gameObject.SetActive (false);
 		}
-		root_on = kub_root.GetComponent<CircleCollider2D> ().enabled;
-		root_on = RigidbodyConstraints2D.FreezePositionX;*/
+*/
 	}
 
 	void OnTriggerStay2D(Collider2D collider)
