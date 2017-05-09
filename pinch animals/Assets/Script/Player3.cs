@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 
-public class Player24 : MonoBehaviour 
+public class Player3 : MonoBehaviour 
 {
 	public Vector2 SPEED = new Vector2(0.05f, 0.05f);
 	public bool Check;
