@@ -27,8 +27,6 @@ public class Player3 : MonoBehaviour
 
 	public bool Flag;
 
-	public bool SeimeiFlag;
-
 	public GameObject PlayerHP;
 
 	public enum State
@@ -59,7 +57,6 @@ public class Player3 : MonoBehaviour
 		Speed = 0.1f;
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクトい貼られているリジッドボディへの参照（ポインタ）を取得
 		//関数化をα終了後かβ終了後にする
-		kubInit();
 		Flag=false;
 	}
 
@@ -68,12 +65,6 @@ public class Player3 : MonoBehaviour
 		Power = 0;
 		Speed = 0.1f;
 		state = State.Start;
-	}
-		
-	void kubInit()
-	{
-
-		SeimeiFlag = true;
 	}
 
 	void kubUpdate ()
@@ -160,7 +151,7 @@ public class Player3 : MonoBehaviour
 						Speed *= -1;
 					}
 
-					if (Power <= -1) 
+					if (Power <= -1)
 					{
 						Init ();
 					}
@@ -182,8 +173,6 @@ public class Player3 : MonoBehaviour
 				default:
 					break;
 				}
-
-
 			}
 			//MainSpriteRenderer.sprite = PulloutSprite;
 			if (Input.GetKey (KeyCode.LeftArrow)) 

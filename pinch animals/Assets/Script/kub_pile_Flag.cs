@@ -13,11 +13,11 @@ public class kub_pile_Flag : MonoBehaviour
 
 	public GameObject ClearFlag;
 
-	public static bool Check;
+	public static bool clearCheck;
 
 	void Start ()
 	{
-		Check = false;
+		clearCheck = false;
 	}
 
 
@@ -36,7 +36,7 @@ public class kub_pile_Flag : MonoBehaviour
 		    KuF3 == true )
 		/*if(Input.GetKey(KeyCode.A))*/
 		{
-			Check = true;
+			clearCheck = true;
 			ClearFlag.gameObject.SetActive (true);
 			transform.position.Set (0, 0, 0);
 		}
