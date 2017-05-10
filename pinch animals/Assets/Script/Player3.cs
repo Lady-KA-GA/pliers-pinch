@@ -29,6 +29,13 @@ public class Player3 : MonoBehaviour
 
 	public GameObject PlayerHP;
 
+	public GameObject HP1;
+	public GameObject HP2;
+	public GameObject HP3;
+
+	public int HitPoint;
+	public static bool DeathFlag;
+
 	public enum State
 	{
 		Start,
@@ -58,6 +65,7 @@ public class Player3 : MonoBehaviour
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクトい貼られているリジッドボディへの参照（ポインタ）を取得
 		//関数化をα終了後かβ終了後にする
 		Flag=false;
+		DeathFlag = false;
 	}
 
 	void Init()
@@ -80,7 +88,8 @@ public class Player3 : MonoBehaviour
 				GameObject _child_kub = obj.transform.FindChild ("kub_root").gameObject;
 				if (Flag && (PowerPre >0.0f && PowerPre < 1.5f))
 				{
-					PlayerHP.SetActive (false);
+					//PlayerHP.SetActive (false);
+					HitPointFunction();
 					Flag = false;
 				}
 				if (Flag && (PowerPre > 1.5f && PowerPre < 3.0f))
@@ -101,7 +110,8 @@ public class Player3 : MonoBehaviour
 				GameObject _child_pile = obj.transform.FindChild ("pile_root").gameObject;
 				if (Flag && (PowerPre >0.0f && PowerPre < 4.0f))
 				{
-					PlayerHP.SetActive (false);
+					//PlayerHP.SetActive (false);
+					HitPointFunction();
 					Flag = false;
 				}
 				if (Flag && (PowerPre > 4.0f && PowerPre < 5.0f))
@@ -131,6 +141,8 @@ public class Player3 : MonoBehaviour
 		poseFlag = Pose.i;
 		Vector2 Position = transform.position;
 		Vector2 Rotation = transform.eulerAngles;
+
+		HitPoint = PlayerHP.transform.childCount;
 
 		//Vector2 PenPos = new Vector2 (penchi.transform.position.x+0.3f, penchi.transform.position.y);
 		if (poseFlag == false) 
@@ -208,6 +220,26 @@ public class Player3 : MonoBehaviour
 			transform.eulerAngles = Rotation;
 		}
 	}
+
+	void HitPointFunction()
+	{
+		switch(HitPoint)
+		{
+		case 1:
+			DeathFlag = true;
+			Destroy (HP1);
+			break;
+		case 2:
+			Destroy (HP2);
+			break;
+		case 3:
+			Destroy (HP3);
+			break;
+		default:
+			break;
+		}
+	}
+
 
 	/// <summary>
 	///関数の説明

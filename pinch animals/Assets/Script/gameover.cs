@@ -15,6 +15,8 @@ public class gameover : MonoBehaviour
 
 	public static bool overCheck;
 
+	public bool PlayerDeath;
+
 	void Start ()
 	{
 		overCheck = false;
@@ -29,11 +31,14 @@ public class gameover : MonoBehaviour
 		bool KuF2 = kub2.activeInHierarchy;
 		bool KuF3 = kub3.activeInHierarchy;
 
+		PlayerDeath = Player3.DeathFlag;
+
 		if (PiF == false ||
 			KuF0 == false ||
 			KuF1 == false ||
 			KuF2 == false ||
-			KuF3 == false)
+			KuF3 == false ||
+			PlayerDeath == true	)
 			/*if(Input.GetKey(KeyCode.A))*/
 		{
 			overCheck = true;

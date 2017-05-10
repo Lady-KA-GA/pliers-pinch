@@ -5,6 +5,8 @@ public class pile : MonoBehaviour
 {
 	public GameObject pile_body;
 	public GameObject pile_root;
+
+	/*
 	public bool Check;
 
 	public float HP;
@@ -41,5 +43,15 @@ public class pile : MonoBehaviour
 	void OnTriggerExit2D(Collider2D collider)
 	{
 		Check = false;
+	}
+
+*/
+	void Update ()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			pile_root.GetComponent<PolygonCollider2D> ().enabled = true;
+			pile_body.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+		}
 	}
 }

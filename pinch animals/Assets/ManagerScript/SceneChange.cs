@@ -9,6 +9,10 @@ public class SceneChange : MonoBehaviour
 	//遷移したかどうかを保存する変数
 	bool Moved = false;
 
+	public bool clearFlag;
+	public bool overFlag;
+
+
 	void Start ()
     {
       //  AudioManager.Instance.PlayBGM("");
@@ -17,7 +21,11 @@ public class SceneChange : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		clearFlag = kub_pile_Flag.clearCheck;
+		overFlag = gameover.overCheck;
+
         //Debug.Log (nextScene);
         if (!Moved)
         {
@@ -37,7 +45,7 @@ public class SceneChange : MonoBehaviour
 				}*/
 				break;
 			case "stage1":
-				if (Input.GetKeyDown(KeyCode.A))
+				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
 				{
 					ChangeScene ();
 				}
