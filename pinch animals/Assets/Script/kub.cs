@@ -39,7 +39,7 @@ public class kub : MonoBehaviour
 		//抜けた後数値を初期化出来たら良し
 		//数値が取れた後が問題で1回増減すると残りにも適用される
 		//0にすると失敗の判定を取られるのも注意
-		HP = Player24.PowerPre;
+		HP = Player3.PowerPre;
 		if (Check == true &&/* Flag == true &&*/ (HP >= 0.5 && HP <= 2.5)) 
 		{
 			Check = false;
@@ -54,7 +54,8 @@ public class kub : MonoBehaviour
 		}
 
 		if (Count == 1)
-		{ 
+		{
+			Debug.Log("a");
 			nuku_se.PlayOneShot(nuku_se.clip);
 
 			Count += 1;
