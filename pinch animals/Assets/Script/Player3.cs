@@ -15,33 +15,36 @@ public class Player3 : MonoBehaviour
 	public GameObject penchi;
 
 	public Sprite NormalSprite;//待機状態
-	public Sprite WalkSprite1;//歩く状態1
-	public Sprite WalkSprite2;//歩く状態2
-	public Sprite InterposeSprite;//挟む状態
-	public Sprite PulloutSprite;//抜く状態
 
 	public Slider _slider;
 	public float Power;
 	public static float PowerPre;
 	float Speed; 
 
-	public bool Press;
-	public static bool PressPre;
-
-	GameObject obj=null;
-
+	public GameObject obj=null;
 
 	public Rigidbody2D rigid2D;
+
+	public bool Flag;
+
+	public GameObject PlayerHP;
 
 	public enum State
 	{
 		Start,
 		Fluctuation,
-		Stop,
 		Initializ
 	};
 
-	public static State state;
+	public enum Type
+	{
+		kub,
+		pile,
+		pole
+	};
+
+	public State state;
+	public Type type;
 
 	void Start () 
 	{
@@ -52,100 +55,146 @@ public class Player3 : MonoBehaviour
 		Power = 0;
 		PowerPre = 0;
 		Speed = 0.1f;
-
-		Press = false;
-		PressPre = false;
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクトい貼られているリジッドボディへの参照（ポインタ）を取得
 		//関数化をα終了後かβ終了後にする
-
+		Flag=false;
 	}
 
 	void Init()
 	{
 		Power = 0;
-		//PowerPre = 0;
-		//Speed = 0.0f;
 		Speed = 0.1f;
-
-		Press = false;
-		PressPre = false;
+		state = State.Start;
 	}
 
+	void kubUpdate ()
+	{
+		//抜けた後数値を初期化出来たら良し
+		//数値が取れた後が問題で1回増減すると残りにも適用される
+		//0にすると失敗の判定を取られるのも注意
+		if (obj != null)
+		{
+			switch (type)
+			{
+			case Type.kub:
+				GameObject _child_kub = obj.transform.FindChild ("kub_root").gameObject;
+				if (Flag && (PowerPre >0.0f && PowerPre < 1.5f))
+				{
+					PlayerHP.SetActive (false);
+					Flag = false;
+				}
+				if (Flag && (PowerPre > 1.5f && PowerPre < 3.0f))
+				{
+					_child_kub.GetComponent<CircleCollider2D> ().enabled = true;
+					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+					Flag = false;
 
-	void Update () 
+				}
+				if (Flag && (PowerPre > 3.0f && PowerPre < 11))
+				{
+					obj.SetActive (false);
+					Flag = false;
+				}
+				break;
+
+			case Type.pile:
+				GameObject _child_pile = obj.transform.FindChild ("pile_root").gameObject;
+				if (Flag && (PowerPre >0.0f && PowerPre < 4.0f))
+				{
+					PlayerHP.SetActive (false);
+					Flag = false;
+				}
+				if (Flag && (PowerPre > 4.0f && PowerPre < 5.0f))
+				{
+					_child_pile.GetComponent<PolygonCollider2D> ().enabled = true;
+					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+					Flag = false;
+
+				}
+				if (Flag && (PowerPre > 5.0f && PowerPre < 11))
+				{
+					obj.SetActive (false);
+					Flag = false;
+				}
+				break;
+
+			case Type.pole:
+
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	void Update ()
 	{
 		poseFlag = Pose.i;
 		Vector2 Position = transform.position;
 		Vector2 Rotation = transform.eulerAngles;
 
-		Vector2 PenPos = new Vector2 (penchi.transform.position.x+0.3f, penchi.transform.position.y);
-
-		switch (state) 
-		{
-		case State.Start:
-			if (Input.GetKeyDown (KeyCode.Space)) 
-			{
-				state = State.Fluctuation;
-			}
-			break;
-		case State.Fluctuation:
-			if (Power >= 10) 
-			{
-				Speed *= -1;
-			}
-
-			if (Power <= -1) 
-			{
-				Init ();
-			}
-
-			if (Input.GetKeyDown (KeyCode.Space)) 
-			{
-				state = State.Stop;
-			}
-			Power += Speed;
-			_slider.value = Power;
-			break;
-		case State.Stop:
-			PowerPre = Power;
-			state = State.Initializ;
-			break;
-		case State.Initializ:
-			if (Power != 0) 
-			{
-				Init ();
-			}
-			else 
-			{
-				state = State.Start;
-			}
-			break;
-		default:
-			break;
-		}
-
-
+		//Vector2 PenPos = new Vector2 (penchi.transform.position.x+0.3f, penchi.transform.position.y);
 		if (poseFlag == false) 
 		{
+			if (obj != null) 
+			{
+				switch (state)
+				{
+				case State.Start:
+					if (Input.GetKeyDown (KeyCode.Space)) 
+					{
+						state = State.Fluctuation;
+					}
+					break;
+				case State.Fluctuation:
+					if (Power >= 10) 
+					{
+						Speed *= -1;
+					}
+
+					if (Power <= -1)
+					{
+						Init ();
+					}
+
+					if (Input.GetKeyDown (KeyCode.Space)) 
+					{
+						PowerPre = Power;
+						Flag = true;
+						state = State.Initializ;
+					}
+					Power += Speed;
+					_slider.value = Power;
+					break;
+				case State.Initializ:
+
+					Init ();
+			
+					break;
+				default:
+					break;
+				}
+			}
 			//MainSpriteRenderer.sprite = PulloutSprite;
 			if (Input.GetKey (KeyCode.LeftArrow)) 
 			{
 				Rotation.y = 0;
 				Position.x -= SPEED.x;
+				state = State.Initializ;
 			}
 
 			if (Input.GetKey (KeyCode.RightArrow)) 
 			{
 				Rotation.y = 180;
 				Position.x += SPEED.x;
+				state = State.Initializ;
 			}
-			if (Check == true)
+			if (Check == true) 
 			{
-
 				if (Input.GetKeyDown (KeyCode.UpArrow)) 
 				{
 					Position.y += SPEED.y + 2;
 					Check = false;
+					state = State.Initializ;
 
 					/*	Vector2 velo = rigid2D.velocity;
 					Vector2 newVelo = new Vector2 (velo.x,20);
@@ -153,47 +202,11 @@ public class Player3 : MonoBehaviour
 				}
 			}
 
-			/*		if (Input.GetKeyDown (KeyCode.Space)) 
-			{
-				if (Press == false) 
-				{
-					Press = true;
-					PressPre = false;
-				}
-				else 
-				{
-					PowerPre = Power;
-					Press = false;
-					PressPre = true;
-				}
-			}
+			kubUpdate ();
 
-			if (Press == true)
-			{
-				if (Power >= 10) 
-				{
-					Speed*=-1;
-				}
-				Power += Speed;
-				if (Power <= -1) 
-				{
-					Init ();
-				}
-			} 
-			else 
-			{
-				Init ();
-			}
-*/
 			transform.position = Position;
 			transform.eulerAngles = Rotation;
 		}
-		else 
-		{
-
-		}
-
-		//_slider.value = Power;
 	}
 
 	/// <summary>
@@ -206,6 +219,22 @@ public class Player3 : MonoBehaviour
 		if (collider.gameObject.name == "kub") 
 		{
 			obj = collider.gameObject;
+			type = Type.kub;
 		}
+		if (collider.gameObject.name == "pile") 
+		{
+			obj = collider.gameObject;
+			type = Type.pile;
+		}
+		if (collider.gameObject.name == "pole") 
+		{
+			type = Type.pole;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D collider)
+	{
+		Check = false;
+		obj = null;
 	}
 }
