@@ -25,7 +25,7 @@ public class Pose : MonoBehaviour
 		case true:
 			MainSpriteRenderer.sprite = ChangeSpriteRenderer;
 			Time.timeScale = 0;
-			if (Input.GetKeyDown (KeyCode.Escape)) 
+			if (Input.GetKeyDown (KeyCode.LeftControl)) 
 			{
 				i = false;
 			}
@@ -33,7 +33,7 @@ public class Pose : MonoBehaviour
 		case false:
 			MainSpriteRenderer.sprite = AxisSpriteRenderer;
 			Time.timeScale = 1;
-			if (Input.GetKeyDown (KeyCode.Escape)) 
+			if (Input.GetKeyDown (KeyCode.LeftControl)) 
 			{
 				i = true;
 			}

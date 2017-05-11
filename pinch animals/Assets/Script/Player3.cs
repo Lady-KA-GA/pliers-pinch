@@ -36,6 +36,11 @@ public class Player3 : MonoBehaviour
 	public int HitPoint;
 	public static bool DeathFlag;
 
+	AudioSource sound;
+
+	public GameObject kubProper;
+	public GameObject pilePropel;
+
 	public enum State
 	{
 		Start,
@@ -82,6 +87,7 @@ public class Player3 : MonoBehaviour
 		//0にすると失敗の判定を取られるのも注意
 		if (obj != null)
 		{
+			sound = obj.GetComponent<AudioSource> ();
 			switch (type)
 			{
 			case Type.kub:
@@ -97,9 +103,10 @@ public class Player3 : MonoBehaviour
 					_child_kub.GetComponent<CircleCollider2D> ().enabled = true;
 					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 					Flag = false;
+					sound.PlayOneShot (sound.clip);
 
 				}
-				if (Flag && (PowerPre > 3.0f && PowerPre < 11))
+				if (Flag && (PowerPre > 3.0f && PowerPre < 10))
 				{
 					obj.SetActive (false);
 					Flag = false;
@@ -114,14 +121,15 @@ public class Player3 : MonoBehaviour
 					HitPointFunction();
 					Flag = false;
 				}
-				if (Flag && (PowerPre > 4.0f && PowerPre < 5.0f))
+				if (Flag && (PowerPre > 4.3f && PowerPre < 5.7f))
 				{
 					_child_pile.GetComponent<PolygonCollider2D> ().enabled = true;
 					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 					Flag = false;
+					sound.PlayOneShot (sound.clip);
 
 				}
-				if (Flag && (PowerPre > 5.0f && PowerPre < 11))
+				if (Flag && (PowerPre > 5.0f && PowerPre < 10))
 				{
 					obj.SetActive (false);
 					Flag = false;
@@ -138,6 +146,8 @@ public class Player3 : MonoBehaviour
 	}
 	void Update ()
 	{
+		//sound = obj.GetComponent<AudioSource> ();
+
 		poseFlag = Pose.i;
 		Vector2 Position = transform.position;
 		Vector2 Rotation = transform.eulerAngles;
@@ -251,11 +261,13 @@ public class Player3 : MonoBehaviour
 		if (collider.gameObject.name == "kub") 
 		{
 			obj = collider.gameObject;
+			kubProper.SetActive (true);
 			type = Type.kub;
 		}
 		if (collider.gameObject.name == "pile") 
 		{
 			obj = collider.gameObject;
+			pilePropel.SetActive (true);
 			type = Type.pile;
 		}
 		if (collider.gameObject.name == "pole") 
@@ -268,5 +280,14 @@ public class Player3 : MonoBehaviour
 	{
 		Check = false;
 		obj = null;
+		if (kubProper.activeInHierarchy == true) 
+		{
+			kubProper.SetActive (false);
+		}
+		if (pilePropel.activeInHierarchy == true) 
+		{
+			pilePropel.SetActive (false);
+		}
+
 	}
 }

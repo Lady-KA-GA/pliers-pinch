@@ -83,6 +83,7 @@
      <Compile Include="Assets\Script\test.cs" />
      <Compile Include="Assets\Script\testMoveManerger.cs" />
      <Compile Include="Assets\Script\testNom.cs" />
+     <Compile Include="Assets\Script\testSound.cs" />
      <Compile Include="Assets\Script\title.cs" />
      <Compile Include="Assets\Script\tree.cs" />
  <Reference Include="UnityEngine.Networking">
