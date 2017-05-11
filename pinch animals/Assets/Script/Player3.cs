@@ -17,6 +17,7 @@ public class Player3 : MonoBehaviour
 	public Sprite NormalSprite;//待機状態
 
 	public Slider _slider;
+	public GameObject sliderObj;
 	public float Power;
 	public static float PowerPre;
 	float Speed; 
@@ -66,7 +67,7 @@ public class Player3 : MonoBehaviour
 
 		Power = 0;
 		PowerPre = 0;
-		Speed = 0.1f;
+		Speed = 0.3f;
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクトい貼られているリジッドボディへの参照（ポインタ）を取得
 		//関数化をα終了後かβ終了後にする
 		Flag=false;
@@ -76,7 +77,7 @@ public class Player3 : MonoBehaviour
 	void Init()
 	{
 		Power = 0;
-		Speed = 0.1f;
+		Speed = 0.3f;
 		state = State.Start;
 	}
 
@@ -258,13 +259,14 @@ public class Player3 : MonoBehaviour
 	void OnTriggerStay2D(Collider2D collider)
 	{
 		Check = true;
+
 		if (collider.gameObject.name == "kub") 
 		{
 			obj = collider.gameObject;
 			kubProper.SetActive (true);
 			type = Type.kub;
 		}
-		if (collider.gameObject.name == "pile") 
+		if (collider.gameObject.name == "pile")
 		{
 			obj = collider.gameObject;
 			pilePropel.SetActive (true);
@@ -274,12 +276,17 @@ public class Player3 : MonoBehaviour
 		{
 			type = Type.pole;
 		}
+		if (obj != null) 
+		{
+			sliderObj.SetActive (true);
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D collider)
 	{
 		Check = false;
 		obj = null;
+
 		if (kubProper.activeInHierarchy == true) 
 		{
 			kubProper.SetActive (false);
@@ -288,6 +295,9 @@ public class Player3 : MonoBehaviour
 		{
 			pilePropel.SetActive (false);
 		}
-
+		if (sliderObj.activeInHierarchy == true) 
+		{
+			sliderObj.SetActive (false);
+		}
 	}
 }
