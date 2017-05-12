@@ -48,9 +48,11 @@
      <Compile Include="Assets\ManagerScript\AudioManager.cs" />
      <Compile Include="Assets\ManagerScript\BGMManager.cs" />
      <Compile Include="Assets\ManagerScript\FadeManager.cs" />
+     <Compile Include="Assets\ManagerScript\PoseToChangeScene.cs" />
      <Compile Include="Assets\ManagerScript\SceneChange.cs" />
      <Compile Include="Assets\ManagerScript\ScoreManager.cs" />
      <Compile Include="Assets\ManagerScript\SingletonMonoBehaviour.cs" />
+     <Compile Include="Assets\ManagerScript\ToStage.cs" />
      <Compile Include="Assets\Script\BottomSound.cs" />
      <Compile Include="Assets\Script\FlagMgm.cs" />
      <Compile Include="Assets\Script\Junp.cs" />

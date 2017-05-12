@@ -86,10 +86,10 @@ public class SceneChange : MonoBehaviour
                 Moved = false;
             }*/
 
-		if (Input.GetKeyDown("space"))
+		/*if (Input.GetKeyDown("space"))
 		{
 			space_se.PlayOneShot(space_se.clip);
-		}
+		}*/
 	}
 
 	void Awake() 
@@ -102,12 +102,13 @@ public class SceneChange : MonoBehaviour
 	{
 		space_se.PlayOneShot(space_se.clip);
 		FadeManager.Instance.LoadLevel(nextScene, 0.5f);
-            Moved = true;        
+        Moved = true;        
     }
 	public void StringArgFunction(string s)
 	{
 		//SceneManager.LoadScene (s);
 		space_se.PlayOneShot(space_se.clip);
 		FadeManager.Instance.LoadLevel(s, 0.5f);
+		Debug.Log("シーン"+s);
 	}
 }
