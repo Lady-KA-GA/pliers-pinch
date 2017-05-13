@@ -73,9 +73,12 @@
      <Compile Include="Assets\Script\kub_pile_Flag.cs" />
      <Compile Include="Assets\Script\kusa.cs" />
      <Compile Include="Assets\Script\pile.cs" />
+     <Compile Include="Assets\Script\pile_pole_Flag.cs" />
+     <Compile Include="Assets\Script\pile_pole_gameove.cs" />
      <Compile Include="Assets\Script\pole.cs" />
      <Compile Include="Assets\Script\pole_Test.cs" />
      <Compile Include="Assets\Script\root.cs" />
+     <Compile Include="Assets\Script\sliderPos.cs" />
      <Compile Include="Assets\Script\stage_select.cs" />
      <Compile Include="Assets\Script\sub1.cs" />
      <Compile Include="Assets\Script\sub2.cs" />

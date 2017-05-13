@@ -110,6 +110,7 @@ public class Player3 : MonoBehaviour
 				if (Flag && (PowerPre > 3.0f && PowerPre < 10))
 				{
 					obj.SetActive (false);
+					HitPointFunction();
 					Flag = false;
 				}
 				break;
@@ -133,12 +134,33 @@ public class Player3 : MonoBehaviour
 				if (Flag && (PowerPre > 5.0f && PowerPre < 10))
 				{
 					obj.SetActive (false);
+					HitPointFunction();
 					Flag = false;
 				}
 				break;
 
 			case Type.pole:
+				GameObject _child_pole = obj.transform.FindChild ("pole_root").gameObject;
+				if (Flag && (PowerPre >0.0f && PowerPre < 7.0f))
+				{
+					//PlayerHP.SetActive (false);
+					HitPointFunction();
+					Flag = false;
+				}
+				if (Flag && (PowerPre > 7.0f && PowerPre < 8.0f))
+				{
+					_child_pole.GetComponent<BoxCollider2D> ().enabled = true;
+					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+					Flag = false;
+					sound.PlayOneShot (sound.clip);
 
+				}
+				if (Flag && (PowerPre > 8.5f && PowerPre < 10))
+				{
+					obj.SetActive (false);
+					HitPointFunction();
+					Flag = false;
+				}
 				break;
 			default:
 				break;
@@ -274,6 +296,8 @@ public class Player3 : MonoBehaviour
 		}
 		if (collider.gameObject.name == "pole") 
 		{
+			obj = collider.gameObject;
+			//polePropel.SetActive (true);
 			type = Type.pole;
 		}
 		if (obj != null) 
@@ -295,6 +319,10 @@ public class Player3 : MonoBehaviour
 		{
 			pilePropel.SetActive (false);
 		}
+	/*	if (PolePropel.activeInHierarchy == true) 
+		{
+			PolePropel.SetActive (false);
+		}*/
 		if (sliderObj.activeInHierarchy == true) 
 		{
 			sliderObj.SetActive (false);

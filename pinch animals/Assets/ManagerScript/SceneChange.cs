@@ -51,7 +51,7 @@ public class SceneChange : MonoBehaviour
 				}
 				break;
 			case "stage2":
-				if (Input.GetKeyDown(KeyCode.A))
+				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
 				{
 					ChangeScene ();
 				}
