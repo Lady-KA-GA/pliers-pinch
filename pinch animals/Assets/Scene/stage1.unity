@@ -2405,6 +2405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poseui: {fileID: 1374040784}
+  Stage: {fileID: 120675075}
 --- !u!4 &1519457381
 Transform:
   m_ObjectHideFlags: 0
