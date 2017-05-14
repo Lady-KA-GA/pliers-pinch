@@ -61,6 +61,7 @@
      <Compile Include="Assets\Script\Player3.cs" />
      <Compile Include="Assets\Script\Pose.cs" />
      <Compile Include="Assets\Script\PullOut.cs" />
+     <Compile Include="Assets\Script\aura.cs" />
      <Compile Include="Assets\Script\button_function.cs" />
      <Compile Include="Assets\Script\camera.cs" />
      <Compile Include="Assets\Script\child.cs" />

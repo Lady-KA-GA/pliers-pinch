@@ -42,6 +42,12 @@ public class Player3 : MonoBehaviour
 	public GameObject kubProper;
 	public GameObject pilePropel;
 
+	public GameObject aura;
+
+	Vector3 vec;
+
+
+
 	public enum State
 	{
 		Start,
@@ -79,6 +85,7 @@ public class Player3 : MonoBehaviour
 		Power = 0;
 		Speed = 0.3f;
 		state = State.Start;
+		aura.SetActive (false);	
 	}
 
 	void kubUpdate ()
@@ -167,6 +174,7 @@ public class Player3 : MonoBehaviour
 			}
 		}
 	}
+
 	void Update ()
 	{
 		//sound = obj.GetComponent<AudioSource> ();
@@ -191,16 +199,15 @@ public class Player3 : MonoBehaviour
 					}
 					break;
 				case State.Fluctuation:
-					if (Power >= 10) 
-					{
+					aura.SetActive (true);
+					if (Power >= 10) {
 						Speed *= -1;
 					}
 
-					if (Power <= -1)
-					{
-						Init ();
+					if (Power <= -1) {
+						Speed *= -1;
 					}
-
+					vec.Set (Power,Power,Power);
 					if (Input.GetKeyDown (KeyCode.Space)) 
 					{
 						PowerPre = Power;
@@ -251,6 +258,7 @@ public class Player3 : MonoBehaviour
 
 			transform.position = Position;
 			transform.eulerAngles = Rotation;
+			aura.transform.localScale = vec;
 		}
 	}
 
