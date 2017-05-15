@@ -3,19 +3,23 @@ using System.Collections;
 
 public class gameover : MonoBehaviour 
 {
-	public GameObject kub0;
-	public GameObject kub1;
-	public GameObject kub2;
-	public GameObject kub3;
+	public GameObject obj0;
+	public GameObject obj1;
+	public GameObject obj2;
+	public GameObject obj3;
 
 
-	public GameObject pileFlag;
+	public GameObject objFlag;
 
 	public GameObject OverFlag;
 
 	public static bool overCheck;
 
+
 	private AudioSource gameover_se;
+
+	public bool PlayerDeath;
+
 
 	void Start ()
 	{
@@ -26,17 +30,20 @@ public class gameover : MonoBehaviour
 
 	void Update ()
 	{
-		bool PiF = pileFlag.activeInHierarchy;
-		bool KuF0 = kub0.activeInHierarchy;
-		bool KuF1 = kub1.activeInHierarchy;
-		bool KuF2 = kub2.activeInHierarchy;
-		bool KuF3 = kub3.activeInHierarchy;
+		bool objF = objFlag.activeInHierarchy;
+		bool objF0 = obj0.activeInHierarchy;
+		bool objF1 = obj1.activeInHierarchy;
+		bool objF2 = obj2.activeInHierarchy;
+		bool objF3 = obj3.activeInHierarchy;
 
-		if (PiF == false ||
-			KuF0 == false ||
-			KuF1 == false ||
-			KuF2 == false ||
-			KuF3 == false)
+		PlayerDeath = Player3.DeathFlag;
+
+		if (objF == false ||
+			objF0 == false ||
+			objF1 == false ||
+			objF2 == false ||
+			objF3 == false ||
+			PlayerDeath == true	)
 			/*if(Input.GetKey(KeyCode.A))*/
 		{
 			overCheck = true;

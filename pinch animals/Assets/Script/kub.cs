@@ -5,6 +5,8 @@ public class kub : MonoBehaviour
 {
 	public GameObject kub_body;
 	public GameObject kub_root;
+
+	/*
 	public bool Check;
 
 	public float HP;
@@ -39,6 +41,7 @@ public class kub : MonoBehaviour
 		//抜けた後数値を初期化出来たら良し
 		//数値が取れた後が問題で1回増減すると残りにも適用される
 		//0にすると失敗の判定を取られるのも注意
+
 		HP = Player3.PowerPre;
 		if (Check == true &&/* Flag == true &&*/ (HP >= 0.5 && HP <= 2.5)) 
 		{
@@ -77,7 +80,7 @@ public class kub : MonoBehaviour
 		{
 			gameObject.SetActive (false);
 		}
-*/
+
 	}
 
 	void OnTriggerStay2D(Collider2D collider)
@@ -93,5 +96,14 @@ public class kub : MonoBehaviour
 	void OnTriggerExit2D(Collider2D collider)
 	{
 		Check = false;
+	}
+	*/
+	void Update ()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			kub_root.GetComponent<CircleCollider2D> ().enabled = true;
+			kub_body.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+		}
 	}
 }
