@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class pole : MonoBehaviour 
-{
+{/*
 	public GameObject pole_body;
 	public GameObject pole_root;
 	public bool Check;
@@ -18,8 +18,8 @@ public class pole : MonoBehaviour
 
 	void Update () 
 	{
-		HP = Player2.PowerPre;
-		Flag = Player2.PressPre;
+		HP = Player3.PowerPre;
+		Flag = Player3.PressPre;
 		if(Check == true && Flag==true && (HP >= 6.5 && HP <= 8.5))
 		{
 			Check = false;
@@ -42,5 +42,5 @@ public class pole : MonoBehaviour
 	{
 		Check = false;
 	}
-
+*/
 }

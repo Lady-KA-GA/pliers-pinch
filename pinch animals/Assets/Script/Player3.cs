@@ -17,16 +17,24 @@ public class Player3 : MonoBehaviour
 	public Sprite NormalSprite;//待機状態
 
 	public Slider _slider;
+	public Slider pullSlider;
+
 	public GameObject sliderObj;
 	public float Power;
 	public static float PowerPre;
+
+	public float pullPower;
+
 	float Speed; 
+	float pullSpeed;
 
 	public GameObject obj=null;
 
 	public Rigidbody2D rigid2D;
 
 	public bool Flag;
+
+	public bool pullFlag;
 
 	public GameObject PlayerHP;
 
@@ -51,7 +59,8 @@ public class Player3 : MonoBehaviour
 	public enum State
 	{
 		Start,
-		Fluctuation,
+		Interpose,
+		Pull,
 		Initializ
 	};
 
@@ -74,10 +83,12 @@ public class Player3 : MonoBehaviour
 		Power = 0;
 		PowerPre = 0;
 		Speed = 0.3f;
-		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクトい貼られているリジッドボディへの参照（ポインタ）を取得
+		pullSpeed = 0.3f;
+		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクト貼られているリジッドボディへの参照（ポインタ）を取得
 		//関数化をα終了後かβ終了後にする
 		Flag=false;
 		DeathFlag = false;
+		pullFlag = false;
 	}
 
 	void Init()
@@ -111,6 +122,7 @@ public class Player3 : MonoBehaviour
 					_child_kub.GetComponent<CircleCollider2D> ().enabled = true;
 					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 					Flag = false;
+					pullFlag = true;
 					sound.PlayOneShot (sound.clip);
 
 				}
@@ -124,25 +136,29 @@ public class Player3 : MonoBehaviour
 
 			case Type.pile:
 				GameObject _child_pile = obj.transform.FindChild ("pile_root").gameObject;
-				if (Flag && (PowerPre >0.0f && PowerPre < 4.0f))
-				{
-					//PlayerHP.SetActive (false);
-					HitPointFunction();
-					Flag = false;
-				}
-				if (Flag && (PowerPre > 4.3f && PowerPre < 5.7f))
-				{
-					_child_pile.GetComponent<PolygonCollider2D> ().enabled = true;
-					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
-					Flag = false;
-					sound.PlayOneShot (sound.clip);
 
-				}
-				if (Flag && (PowerPre > 5.0f && PowerPre < 10))
+				if (state == State.Interpose) 
 				{
-					obj.SetActive (false);
-					HitPointFunction();
-					Flag = false;
+					if (Flag && (PowerPre > 0.0f && PowerPre < 4.0f))
+					{
+						//PlayerHP.SetActive (false);
+						HitPointFunction ();
+						Flag = false;
+					}
+					if (Flag && (PowerPre > 4.3f && PowerPre < 5.7f)) 
+					{
+						_child_pile.GetComponent<PolygonCollider2D> ().enabled = true;
+						obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+						Flag = false;
+						pullFlag = true;
+						sound.PlayOneShot (sound.clip);
+					}
+					if (Flag && (PowerPre > 5.0f && PowerPre < 10)) 
+					{
+						obj.SetActive (false);
+						HitPointFunction ();
+						Flag = false;
+					}
 				}
 				break;
 
@@ -159,6 +175,7 @@ public class Player3 : MonoBehaviour
 					_child_pole.GetComponent<BoxCollider2D> ().enabled = true;
 					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 					Flag = false;
+					pullFlag = true;
 					sound.PlayOneShot (sound.clip);
 
 				}
@@ -195,16 +212,18 @@ public class Player3 : MonoBehaviour
 				case State.Start:
 					if (Input.GetKeyDown (KeyCode.Space)) 
 					{
-						state = State.Fluctuation;
+						state = State.Interpose;
 					}
 					break;
-				case State.Fluctuation:
+				case State.Interpose:
 					aura.SetActive (true);
-					if (Power >= 10) {
+					if (Power >= 10) 
+					{
 						Speed *= -1;
 					}
 
-					if (Power <= -1) {
+					if (Power <= -1) 
+					{
 						Speed *= -1;
 					}
 					vec.Set (Power,Power,Power);
@@ -212,10 +231,48 @@ public class Player3 : MonoBehaviour
 					{
 						PowerPre = Power;
 						Flag = true;
-						state = State.Initializ;
+						if (pullFlag == true) 
+						{
+							state = State.Pull;
+						} 
+						else 
+						{
+							state = State.Initializ;
+						}
 					}
 					Power += Speed;
 					_slider.value = Power;
+					break;
+				case State.Pull:
+
+					if (type != Type.kub) 
+					{
+
+					}
+					else
+					{
+						state = State.Initializ;
+					}
+
+					switch(type)
+					{
+					case Type.pile:
+						if (Input.GetKeyDown (KeyCode.Space)) 
+						{
+							pullPower += 1;
+						}
+						if (pullPower >= -1) 
+						{
+							pullPower -= pullSpeed;
+						}
+						pullSlider.value = pullPower;
+						break;
+					case Type.pole:
+						
+						break;
+					default:
+						break;
+					}
 					break;
 				case State.Initializ:
 

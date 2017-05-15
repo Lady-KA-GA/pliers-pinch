@@ -78,6 +78,7 @@
      <Compile Include="Assets\Script\pile_pole_gameove.cs" />
      <Compile Include="Assets\Script\pole.cs" />
      <Compile Include="Assets\Script\pole_Test.cs" />
+     <Compile Include="Assets\Script\pull.cs" />
      <Compile Include="Assets\Script\root.cs" />
      <Compile Include="Assets\Script\sliderPos.cs" />
      <Compile Include="Assets\Script\stage_select.cs" />
