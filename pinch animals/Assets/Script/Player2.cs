@@ -25,6 +25,7 @@ public class Player2 : MonoBehaviour
 	public Slider pullSlider;
 
 	public GameObject sliderObj;
+	public GameObject pullSliderObj;
 	public float Power;
 	public static float PowerPre;
 
@@ -89,6 +90,7 @@ public class Player2 : MonoBehaviour
 	
 		Power = 0;
 		PowerPre = 0;
+		pullPower = 3;
 		Speed = 0.3f;
 		pullSpeed = 0.3f;
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクト貼られているリジッドボディへの参照（ポインタ）を取得
@@ -167,11 +169,16 @@ public class Player2 : MonoBehaviour
 					{
 						pullPower += pullSpeed;
 					}
+					else 
+					{
+						pullPower -= 0.03f;
+					}
 					if (pullPower <= -1) 
 					{
 						pullFlag = false;
+						HitPointFunction ();
 					}
-					if (pullPower >= 5) 
+					if (pullPower >= 7) 
 					{
 						_child_pile.GetComponent<PolygonCollider2D> ().enabled = true;
 						obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
@@ -281,10 +288,7 @@ public class Player2 : MonoBehaviour
 					{
 						PowerPre = Power;
 						Flag = true;
-						//if (pullFlag == true) 
-						//{
-							state = State.Initializ;
-						//}
+						state = State.Initializ;
 					}
 					Power += Speed;
 					_slider.value = Power;
@@ -387,6 +391,7 @@ public class Player2 : MonoBehaviour
 		if (obj != null) 
 		{
 			sliderObj.SetActive (true);
+			pullSliderObj.SetActive (true);
 		}
 	}
 
@@ -410,6 +415,10 @@ public class Player2 : MonoBehaviour
 		if (sliderObj.activeInHierarchy == true) 
 		{
 			sliderObj.SetActive (false);
+		}
+		if (pullSliderObj.activeInHierarchy == true) 
+		{
+			pullSliderObj.SetActive (false);
 		}
 	}
 }
