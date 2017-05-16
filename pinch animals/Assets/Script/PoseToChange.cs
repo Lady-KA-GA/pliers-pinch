@@ -3,9 +3,9 @@ using System.Collections;
 
 public class PoseToChange : MonoBehaviour 
 {
-	void PoseDeactive()
+public void PoseDeactive()
 	{
-		Time.timeScale = 0;
+		Time.timeScale = 1;
 		Pose.i = false;
 	}
 }
