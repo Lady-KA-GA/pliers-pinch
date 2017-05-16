@@ -6,7 +6,7 @@ public class ResultToChange : MonoBehaviour
 
 	public void PoseDeactive() 
 	{
-		Time.timeScale = 1;
+		Time.timeScale = 0;
 		gameover.overCheck = false;
 	}
 }

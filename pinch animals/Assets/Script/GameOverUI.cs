@@ -14,11 +14,13 @@ public class GameOverUI : MonoBehaviour
 		// ボタンコンポーネントの取得
 		//Stage = GameObject.Find("/Canvas/PoseUI/Button").GetComponent<Button>();
 
-		/*if (Stage != null)
+		if (Stage != null)
 		{
 			// 最初に選択状態にしたいボタンの設定
 			Stage.Select();
-		}*/
+		}
+
+		Debug.Log("gameoverui");
 	}
 	
 	// Update is called once per frame
@@ -40,7 +42,9 @@ public class GameOverUI : MonoBehaviour
 			//ゲームオーバー画面であればボタン（UIグループ）を有効化
 			if (gameoverui.gameObject.activeSelf == false)
 			{
+				Debug.Log("GOUI ON");
 				gameoverui.gameObject.SetActive(true);
+				//Debug.Break();
 			}
 		}
 	}

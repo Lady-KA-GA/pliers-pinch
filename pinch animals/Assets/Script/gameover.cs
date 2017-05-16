@@ -43,6 +43,7 @@ public class gameover : MonoBehaviour
 			OverFlag.gameObject.SetActive (true);
 			transform.position.Set (0, 0, 0);
 			gameover_se.PlayOneShot(gameover_se.clip);
+			Debug.Log("ゲームオーバー");
 
 		}
 	}
