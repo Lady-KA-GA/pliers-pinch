@@ -335,7 +335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &226463490
 Transform:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ Transform:
   m_Children:
   - {fileID: 319117600}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &274587977 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 129986, guid: 6ef72ffca83544edb9bbd0b72d943045, type: 2}
@@ -365,12 +365,12 @@ GameObject:
   - 114: {fileID: 319117602}
   - 114: {fileID: 319117601}
   m_Layer: 5
-  m_Name: PoseUI
+  m_Name: PoseBotton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &319117600
 RectTransform:
   m_ObjectHideFlags: 0
