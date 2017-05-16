@@ -65,6 +65,7 @@
      <Compile Include="Assets\Script\Player24.cs" />
      <Compile Include="Assets\Script\Player3.cs" />
      <Compile Include="Assets\Script\Pose.cs" />
+     <Compile Include="Assets\Script\PoseToChange.cs" />
      <Compile Include="Assets\Script\PoseUI.cs" />
      <Compile Include="Assets\Script\PullOut.cs" />
      <Compile Include="Assets\Script\aura.cs" />

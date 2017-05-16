@@ -329,6 +329,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 226463490}
+  - 114: {fileID: 226463491}
   m_Layer: 0
   m_Name: PoseUI
   m_TagString: Untagged
@@ -348,7 +349,21 @@ Transform:
   m_Children:
   - {fileID: 319117600}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
+--- !u!114 &226463491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 226463489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baba6bd2114714ff3b44771c519a6988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AxisSpriteRenderer: {fileID: 0}
+  ChangeSpriteRenderer: {fileID: 21300000, guid: 4566f2e1e94a6483a9a5c805917f4478,
+    type: 3}
 --- !u!1 &274587977 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 129986, guid: 6ef72ffca83544edb9bbd0b72d943045, type: 2}
@@ -364,6 +379,7 @@ GameObject:
   - 222: {fileID: 319117603}
   - 114: {fileID: 319117602}
   - 114: {fileID: 319117601}
+  - 114: {fileID: 319117604}
   m_Layer: 5
   m_Name: PoseBotton
   m_TagString: Untagged
@@ -427,7 +443,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 319117602}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 482330620}
+        m_MethodName: StringArgFunction
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: stage_select
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 319117599}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &319117602
@@ -463,6 +501,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 319117599}
+--- !u!114 &319117604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 319117599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f74a89da9b6470a919cd97d99459e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &332994649
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +706,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ba6d7887482b482e8590061567b9fa8, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &482330620 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11462092, guid: 5ba6d7887482b482e8590061567b9fa8,
+    type: 2}
+  m_PrefabInternal: {fileID: 482330619}
+  m_Script: {fileID: 11500000, guid: 82226a864b3644950bc46c217a6feb0f, type: 3}
 --- !u!1 &579902180 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 140482, guid: 24bd4338181044e1a96704029e376b6f, type: 2}
