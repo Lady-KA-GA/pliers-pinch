@@ -65,9 +65,12 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager> {
 	//コルーチンは一定時間処理を中断することができる
 	public void LoadLevel(string sceneName,float interval)
 	{
+		Debug.Log("FadeManagerLoad Level " +  sceneName);
+
 		//コルーチンに二つ以上を引数を渡す
 		//コルーチンの呼び出し・開始
 		StartCoroutine (TransScene (sceneName, interval));
+
 	}
 
 	//シーン遷移用コルーチン

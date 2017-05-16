@@ -18,4 +18,5 @@ public class stage_select : MonoBehaviour
 		// 最初に選択状態にしたいボタンの設定
 		Stage1B.Select ();
 	}
+
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class gameover : MonoBehaviour 
@@ -15,11 +15,16 @@ public class gameover : MonoBehaviour
 
 	public static bool overCheck;
 
+
 	public bool PlayerDeath;
+
+	private AudioSource gameover_se;
+
 
 	void Start ()
 	{
 		overCheck = false;
+		gameover_se = GetComponent<AudioSource>();
 	}
 
 
@@ -44,6 +49,9 @@ public class gameover : MonoBehaviour
 			overCheck = true;
 			OverFlag.gameObject.SetActive (true);
 			transform.position.Set (0, 0, 0);
+			gameover_se.PlayOneShot(gameover_se.clip);
+			Debug.Log("ゲームオーバー");
+
 		}
 	}
 }
