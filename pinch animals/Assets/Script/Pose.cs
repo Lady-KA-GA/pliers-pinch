@@ -28,6 +28,7 @@ public class Pose : MonoBehaviour
 			if (Input.GetKeyDown (KeyCode.LeftControl)) 
 			{
 				i = false;
+				Debug.Log("ポーズ画面");
 			}
 			break;
 		case false:
