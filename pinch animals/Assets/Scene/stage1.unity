@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e980802bc4f4dbd8d8a321080a2cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poseui: {fileID: 226463489}
+  poseui: {fileID: 319117599}
   Stage: {fileID: 319117601}
 --- !u!4 &904837723
 Transform:
