@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scene/title.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/stage_select.unity
   - enabled: 1
     path: Assets/Scene/stage1.unity
