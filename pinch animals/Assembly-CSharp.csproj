@@ -38,19 +38,17 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+      <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+      <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ManagerScript\AudioManager.cs" />
      <Compile Include="Assets\ManagerScript\BGMManager.cs" />
      <Compile Include="Assets\ManagerScript\FadeManager.cs" />
-     <Compile Include="Assets\ManagerScript\PoseToChangeScene.cs" />
      <Compile Include="Assets\ManagerScript\ResultToChange.cs" />
-     <Compile Include="Assets\ManagerScript\SceneChange.cs" />
      <Compile Include="Assets\ManagerScript\ScoreManager.cs" />
      <Compile Include="Assets\ManagerScript\SingletonMonoBehaviour.cs" />
      <Compile Include="Assets\ManagerScript\ToStage.cs" />
@@ -63,45 +61,33 @@
      <Compile Include="Assets\Script\Player1.cs" />
      <Compile Include="Assets\Script\Player2.cs" />
      <Compile Include="Assets\Script\Player24.cs" />
-     <Compile Include="Assets\Script\Player3.cs" />
-     <Compile Include="Assets\Script\Pose.cs" />
-     <Compile Include="Assets\Script\PoseToChange.cs" />
      <Compile Include="Assets\Script\PoseUI.cs" />
      <Compile Include="Assets\Script\PullOut.cs" />
-     <Compile Include="Assets\Script\aura.cs" />
      <Compile Include="Assets\Script\button_function.cs" />
      <Compile Include="Assets\Script\camera.cs" />
      <Compile Include="Assets\Script\child.cs" />
      <Compile Include="Assets\Script\clear.cs" />
      <Compile Include="Assets\Script\clearflag.cs" />
-     <Compile Include="Assets\Script\gameover.cs" />
      <Compile Include="Assets\Script\gauge.cs" />
-     <Compile Include="Assets\Script\kub.cs" />
      <Compile Include="Assets\Script\kub2.cs" />
      <Compile Include="Assets\Script\kub_pile_Flag.cs" />
      <Compile Include="Assets\Script\kusa.cs" />
-     <Compile Include="Assets\Script\pile.cs" />
-     <Compile Include="Assets\Script\pile_pole_Flag.cs" />
-     <Compile Include="Assets\Script\pile_pole_gameove.cs" />
      <Compile Include="Assets\Script\pole.cs" />
      <Compile Include="Assets\Script\pole_Test.cs" />
      <Compile Include="Assets\Script\root.cs" />
-     <Compile Include="Assets\Script\sliderPos.cs" />
      <Compile Include="Assets\Script\stage_select.cs" />
      <Compile Include="Assets\Script\sub1.cs" />
      <Compile Include="Assets\Script\sub2.cs" />
      <Compile Include="Assets\Script\subtest.cs" />
      <Compile Include="Assets\Script\test.cs" />
      <Compile Include="Assets\Script\testMoveManerger.cs" />
-     <Compile Include="Assets\Script\testNom.cs" />
-     <Compile Include="Assets\Script\testSound.cs" />
      <Compile Include="Assets\Script\title.cs" />
      <Compile Include="Assets\Script\tree.cs" />
  <Reference Include="UnityEngine.Networking">
- <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
