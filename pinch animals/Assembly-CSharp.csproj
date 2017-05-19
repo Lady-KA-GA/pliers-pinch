@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+      <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+      <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -98,10 +98,10 @@
      <Compile Include="Assets\Script\title.cs" />
      <Compile Include="Assets\Script\tree.cs" />
  <Reference Include="UnityEngine.Networking">
- <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/yuto/Downloads/Unity 2.21.27.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Users/yuto/Desktop/Unity 2.21.27.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
