@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 2364518dec6124659ab1ad90b7940a0d
+timeCreated: 1495422006
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: grip_ani_kari_0
+    21300002: grip_ani_kari_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: grip_ani_kari_0
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 1865
+        width: 874
+        height: 1508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13.108002, y: -191.59601}
+        - {x: 10.891998, y: -112.59601}
+        - {x: 16.891998, y: -173.59601}
+        - {x: 49.892, y: -211.59601}
+        - {x: 104.892, y: -296.596}
+        - {x: 124.892, y: -302.596}
+        - {x: 179.892, y: -257.596}
+        - {x: 179.892, y: -237.59601}
+        - {x: 102.892, y: -166.59601}
+        - {x: 74.892, y: -84.59601}
+        - {x: 39.892, y: -12.596008}
+        - {x: 81.892, y: 4.4039917}
+        - {x: 65.892, y: 79.40399}
+        - {x: 70.892, y: 219.40399}
+        - {x: 43.892, y: 276.404}
+        - {x: 6.8919983, y: 304.404}
+        - {x: 2.8919983, y: 310.404}
+        - {x: -80.108, y: 310.404}
+        - {x: -140.108, y: 285.404}
+        - {x: -162.108, y: 214.40399}
+        - {x: -160.108, y: 162.40399}
+        - {x: -106.108, y: 79.40399}
+        - {x: -131.108, y: 56.40399}
+        - {x: -137.108, y: 40.40399}
+        - {x: -67.108, y: 49.40399}
+        - {x: -179.108, y: 29.403992}
+        - {x: -179.108, y: -7.5960083}
+        - {x: -170.108, y: -22.596008}
+        - {x: -147.108, y: -51.59601}
+        - {x: -42.108, y: -74.59601}
+        - {x: -88.108, y: -140.59601}
+        - {x: -80.108, y: -213.59601}
+        - {x: -100.108, y: -293.596}
+        - {x: -86.108, y: -308.596}
+        - {x: -4.1080017, y: -308.596}
+        - {x: 1.8919983, y: -292.596}
+        - {x: -4.1080017, y: -272.596}
+        - {x: -10.108002, y: -259.596}
+    - name: grip_ani_kari_1
+      rect:
+        serializedVersion: 2
+        x: 3029
+        y: 1865
+        width: 1096
+        height: 1508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65.678345, y: -172.59601}
+        - {x: 69.678345, y: -187.59601}
+        - {x: 142.67834, y: -253.59601}
+        - {x: 150.67834, y: -308.596}
+        - {x: 162.67834, y: -308.596}
+        - {x: 225.67834, y: -263.596}
+        - {x: 225.67834, y: -233.59601}
+        - {x: 112.678345, y: -131.59601}
+        - {x: 109.678345, y: -61.59601}
+        - {x: 74.678345, y: 57.40399}
+        - {x: 116.678345, y: 69.40399}
+        - {x: 118.678345, y: 172.40399}
+        - {x: 114.678345, y: 244.40399}
+        - {x: 56.678345, y: 310.404}
+        - {x: -40.321655, y: 310.404}
+        - {x: -95.321655, y: 266.404}
+        - {x: -115.321655, y: 230.40399}
+        - {x: -116.321655, y: 163.40399}
+        - {x: -61.321655, y: 75.40399}
+        - {x: -85.321655, y: 57.40399}
+        - {x: -84.321655, y: 49.40399}
+        - {x: -16.321655, y: 58.40399}
+        - {x: -45.321655, y: 21.403992}
+        - {x: -106.321655, y: 48.40399}
+        - {x: -224.32166, y: 27.403992}
+        - {x: -224.32166, y: 10.403992}
+        - {x: -207.32166, y: -34.59601}
+        - {x: -180.32166, y: -54.59601}
+        - {x: -77.321655, y: -75.59601}
+        - {x: 8.678345, y: -43.59601}
+        - {x: -38.321655, y: -143.59601}
+        - {x: -35.321655, y: -192.59601}
+        - {x: -28.321655, y: -255.59601}
+        - {x: -63.321655, y: -308.596}
+        - {x: 45.678345, y: -308.596}
+        - {x: 48.678345, y: -269.596}
+        - {x: 31.678345, y: -190.59601}
+        - {x: 57.678345, y: -118.59601}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

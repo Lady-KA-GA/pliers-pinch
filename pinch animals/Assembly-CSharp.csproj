@@ -64,9 +64,10 @@
      <Compile Include="Assets\Script\aura.cs" />
      <Compile Include="Assets\Script\button_function.cs" />
      <Compile Include="Assets\Script\camera.cs" />
-     <Compile Include="Assets\Script\child.cs" />
-     <Compile Include="Assets\Script\clear.cs" />
      <Compile Include="Assets\Script\clearflag.cs" />
+     <Compile Include="Assets\Script\clearflag_2.cs" />
+     <Compile Include="Assets\Script\clearflag_3.cs" />
+     <Compile Include="Assets\Script\countDown.cs" />
      <Compile Include="Assets\Script\gameover.cs" />
      <Compile Include="Assets\Script\gauge.cs" />
      <Compile Include="Assets\Script\kub.cs" />

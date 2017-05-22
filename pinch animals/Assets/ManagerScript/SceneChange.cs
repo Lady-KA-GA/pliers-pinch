@@ -9,9 +9,8 @@ public class SceneChange : MonoBehaviour
 	//遷移したかどうかを保存する変数
 	bool Moved = false;
 
-	public bool clearFlag;
-	public bool overFlag;
-
+	bool clearFlag;
+	bool overFlag;
 
 	void Start ()
     {
@@ -23,8 +22,11 @@ public class SceneChange : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		clearFlag = kub_pile_Flag.clearCheck;
-		overFlag = gameover.overCheck;
+		//ここで滅茶苦茶エラー吐かれる
+		//これが出来たら画面遷移完了。
+		//タイトルから遷移する時に必要
+		clearFlag = clearflag.Check;
+		overFlag = Player2.DeathFlag;
 
         //Debug.Log (nextScene);
         if (!Moved)
@@ -44,20 +46,20 @@ public class SceneChange : MonoBehaviour
 					ChangeScene();
 				}*/
 				break;
-			case "stage1":
+			case "stage1_mukai":
 				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
 				{
 					ChangeScene ();
 				}
 				break;
-			case "stage2":
+			case "stage2_mukai":
 				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
 				{
 					ChangeScene ();
 				}
 				break;
 			case "stage3":
-				if (Input.GetKeyDown(KeyCode.A))
+				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
 				{
 					ChangeScene ();
 				}
