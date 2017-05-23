@@ -86,6 +86,7 @@
      <Compile Include="Assets\Script\sub1.cs" />
      <Compile Include="Assets\Script\sub2.cs" />
      <Compile Include="Assets\Script\subtest.cs" />
+     <Compile Include="Assets\Script\tes.cs" />
      <Compile Include="Assets\Script\test.cs" />
      <Compile Include="Assets\Script\testMoveManerger.cs" />
      <Compile Include="Assets\Script\testNom.cs" />

@@ -26,7 +26,12 @@ public class Player2 : MonoBehaviour
 
 	public Sprite nuki;
 
+	public Sprite damage;
 
+
+	public Animator anim;
+
+	//public GameObject animObj;
 
 	public Sprite NormalSprite;//待機状態の画像
 
@@ -46,7 +51,7 @@ public class Player2 : MonoBehaviour
 
 	int Count;
 
-	float CoolTime;
+	public float CoolTime;
 
 	GameObject obj;
 
@@ -91,6 +96,8 @@ public class Player2 : MonoBehaviour
 
 	bool JudgeF;
 
+	bool coolFlag;
+
 	public enum State
 	{
 		Start,
@@ -105,8 +112,18 @@ public class Player2 : MonoBehaviour
 		pole
 	};
 
+	public enum HardState
+	{
+		GaugeStart,
+		Wait,
+		ControlStart,
+		Initializ
+	};
+
+
 	public State state;
 	public Type type;
+	public HardState hardState;
 
 	void Start ()
 	{
@@ -120,7 +137,6 @@ public class Player2 : MonoBehaviour
 		//Speed = 0.3f;
 		pullSpeed = 1.2f;
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクト貼られているリジッドボディへの参照（ポインタ）を取得
-		//関数化をα終了後かβ終了後にする
 		Flag=false;
 		DeathFlag = false;
 		pullFlag = false;
@@ -142,7 +158,12 @@ public class Player2 : MonoBehaviour
 
 		JudgeF = false;
 
-		CoolTime = 0.0f;
+		CoolTime = 1.0f;
+
+		coolFlag = false;
+
+		hardState = HardState.GaugeStart;
+
 	}
 
 	void ObjInit()
@@ -160,22 +181,29 @@ public class Player2 : MonoBehaviour
 			{
 			case Type.kub:
 
-				if (Flag && (PowerPre >= 0.0f && PowerPre <= 1.4f)) {
+				if (Flag && (PowerPre >= 0.0f && PowerPre <= 1.4f))
+				{
+					MainSpriteRenderer.sprite = damage;
 					HitPointFunction ();
 					Flag = false;
 				}
 				if (Flag && (PowerPre >= 1.5f && PowerPre <= 3.0f)) 
 				{
+					anim.SetBool ("test", true);
+
 					vertical = 20;
 					ObjChild.GetComponent<CircleCollider2D> ().enabled = true;
 					obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 					obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
 					obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
 					Flag = false;
-					//sound.PlayOneShot (sound.clip);
+				} 
+				else 
+				{
+					anim.SetBool ("test", false);
 				}
-				if (Flag && (PowerPre >= 3.1f && PowerPre <= 10)) {
-					//obj.SetActive (false);
+				if (Flag && (PowerPre >= 3.1f && PowerPre <= 10)) 
+				{
 					HitPointFunction ();
 					Flag = false;
 				}
@@ -184,16 +212,115 @@ public class Player2 : MonoBehaviour
 				break;
 
 			case Type.pile:
-
-				//クールタイム
-				//時間を表示してカウントダウン。
-				//カウントダウン後、パワコンゲージを開始
-				//連打まで「0」　という表示
-				//連打まで　の表示を何にするか思考
-
-				if (Flag && (PowerPre >= 0.0f && PowerPre <= 4.2f)) 
+				//クールタイムの実装完了
+				//見た目的に分からないのに変わりは無い。
+				//案1）パワコンゲージを少しずつ増やしていき、一定まで貯まると開始される様な見た目
+				switch (hardState) 
 				{
-					//PlayerHP.SetActive (false);
+				case HardState.GaugeStart:
+					if (Flag && (PowerPre >= 0.0f && PowerPre <= 4.2f)) 
+					{
+						MainSpriteRenderer.sprite = damage;
+						HitPointFunction ();
+						Flag = false;
+						hardState = HardState.Initializ;
+					}
+					if (Flag && (PowerPre >= 4.3f && PowerPre <= 5.7f)) 
+					{
+						Flag = false;
+						pullFlag = true;
+						pullPower = 0;
+						hardState = HardState.Wait;
+					}
+					if (Flag && (PowerPre >= 5.8f && PowerPre <= 10)) 
+					{
+						HitPointFunction ();
+						Flag = false;
+						hardState = HardState.Initializ;
+					}
+					break;
+				case HardState.Wait:
+					
+					CoolTime -= Time.deltaTime;
+					pullPower = pullPower + (Time.deltaTime * 5);
+					if (CoolTime <= 0.0f) 
+					{
+						CoolTime = 1.0f;
+						hardState = HardState.ControlStart;
+					}
+					pullSlider.value = pullPower;
+					break;
+				case HardState.ControlStart:
+
+					if (pullFlag == true) 
+					{
+						Numbel.SetActive (true);
+						if (Input.GetKeyDown (KeyCode.Space)) 
+						{
+							pullPower += pullSpeed;
+						} 
+						else 
+						{
+							pullPower -= 0.08f;
+						}
+
+						if (pullPower <= 2.9f) 
+						{
+							//pullFlag = false;
+							HitPointFunction ();
+							pullPower = 5;
+						}
+						if (pullPower >= 7.1f) 
+						{
+							//pullFlag = false;
+							HitPointFunction ();
+							pullPower = 5;
+						}
+
+						if (pullPower >= 3.0f && pullPower <= 7.0f) 
+						{
+							PullTime += Time.deltaTime;
+						}
+
+						if (PullTime >= 3) 
+						{
+							anim.SetBool ("test", true);
+							vertical = 20;
+							horizon = -5;
+							PullTime = 0;
+							pullPower = 5;
+							obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+							ObjChild.GetComponent<PolygonCollider2D> ().enabled = true;
+							obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (horizon, vertical, 0);
+							obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
+
+							pullFlag = false;
+							Numbel.SetActive (false);
+							hardState = HardState.Initializ;
+						} 
+						else
+						{
+							anim.SetBool ("test", false);
+						}
+						pullSlider.value = pullPower;
+					}
+					JudgeF = ObjChild.GetComponent<PolygonCollider2D> ().enabled;
+
+					break;
+				case HardState.Initializ:
+
+					PowerPre = 0;	
+					hardState = HardState.ControlStart;
+					break;
+				default:
+					break;
+				}
+
+
+
+/*				if (Flag && (PowerPre >= 0.0f && PowerPre <= 4.2f)) 
+				{
+					MainSpriteRenderer.sprite = damage;
 					HitPointFunction ();
 					Flag = false;
 				}
@@ -202,16 +329,26 @@ public class Player2 : MonoBehaviour
 					Flag = false;
 					pullFlag = true;
 					pullPower = 5;
-					//sound.PlayOneShot (sound.clip);
 				}
 				if (Flag && (PowerPre >= 5.8f && PowerPre <= 10)) 
 				{
 					HitPointFunction ();
 					Flag = false;
 				}
-
-
+					
 				if (pullFlag == true) 
+				{
+					CoolTime -= Time.deltaTime;
+				}
+
+				if (CoolTime <= 0.0f) 
+				{
+					CoolTime = 1.0f;
+					pullFlag = false;
+				}
+					//クールタイム適用
+					//ゲージに遷移しない等の不具合
+				if (pullFlag == true && coolFlag == true) 
 				{
 					Numbel.SetActive (true);
 					if (Input.GetKeyDown (KeyCode.Space)) 
@@ -225,13 +362,13 @@ public class Player2 : MonoBehaviour
 
 					if (pullPower <= 2.9f)
 					{
-						pullFlag = false;
+						//pullFlag = false;
 						HitPointFunction ();
 						pullPower = 5;
 					}
 					if (pullPower >= 7.1f) 
 					{
-						pullFlag = false;
+						//pullFlag = false;
 						HitPointFunction ();
 						pullPower = 5;
 					}
@@ -243,6 +380,7 @@ public class Player2 : MonoBehaviour
 
 					if (PullTime >= 3) 
 					{
+						anim.SetBool ("test", true);
 						vertical = 20;
 						horizon = -5;
 						PullTime = 0;
@@ -252,8 +390,12 @@ public class Player2 : MonoBehaviour
 						obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (horizon, vertical, 0);
 						obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
 
-						pullFlag = false;
+						//pullFlag = false;
 						Numbel.SetActive (false);
+					} 
+					else 
+					{
+						anim.SetBool ("test", false);
 					}
 					pullSlider.value = pullPower;
 				}
@@ -261,6 +403,7 @@ public class Player2 : MonoBehaviour
 				JudgeF = ObjChild.GetComponent<PolygonCollider2D> ().enabled;
 
 				PowerPre = 0;
+*/
 				break;
 
 			case Type.pole:
@@ -280,8 +423,6 @@ public class Player2 : MonoBehaviour
 
 					obj.GetComponent<EdgeCollider2D> ().enabled = true;
 
-					//sound.PlayOneShot (sound.clip);
-
 				}
 
 				if (Flag && (PowerPre >= 8.6f && PowerPre <= 10)) 
@@ -297,7 +438,7 @@ public class Player2 : MonoBehaviour
 					int Ang2 = 19;
 					int Ang3 = 24;
 
-					switch (Count) 
+					switch (Count)
 					{
 					case 0:
 						if (RoZ >= Ang0)
@@ -311,7 +452,7 @@ public class Player2 : MonoBehaviour
 
 						if (RoZ >= -5 && RoZ <= 5)
 						{
-							if (Input.GetKeyDown (KeyCode.Space)) 
+							if (Input.GetKeyDown (KeyCode.Space))
 							{
 								Count = 1;
 								pullPower += 2;
@@ -321,18 +462,18 @@ public class Player2 : MonoBehaviour
 						break;
 
 					case 1:
-						if (RoZ >= Ang1) 
+						if (RoZ >= Ang1)
 						{
 							RoSpeed *= -1;
 						}
-						if (RoZ <= Ang1 * -1) 
+						if (RoZ <= Ang1 * -1)
 						{
 							RoSpeed *= -1;
 						}
 
-						if (RoZ >= -3 && RoZ <= 3) 
+						if (RoZ >= -3 && RoZ <= 3)
 						{
-							if (Input.GetKeyDown (KeyCode.Space)) 
+							if (Input.GetKeyDown (KeyCode.Space))
 							{
 								Count = 2;
 								pullPower += 2;
@@ -350,9 +491,9 @@ public class Player2 : MonoBehaviour
 							RoSpeed *= -1;
 						}
 
-						if (RoZ >= -1 && RoZ <= 1) 
+						if (RoZ >= -1 && RoZ <= 1)
 						{
-							if (Input.GetKeyDown (KeyCode.Space)) 
+							if (Input.GetKeyDown (KeyCode.Space))
 							{
 								Count = 3;
 								pullPower += 3;
@@ -360,18 +501,18 @@ public class Player2 : MonoBehaviour
 						}
 						break;
 					case 3:
-						if (RoZ >= Ang3) 
+						if (RoZ >= Ang3)
 						{
 							RoSpeed *= -1;
 						}
-						if (RoZ <= Ang3 * -1) 
+						if (RoZ <= Ang3 * -1)
 						{
 							RoSpeed *= -1;
 						}
 
-						if (RoZ >= -1 && RoZ <= 1) 
+						if (RoZ >= -1 && RoZ <= 1)
 						{
-							if (Input.GetKeyDown (KeyCode.Space)) 
+							if (Input.GetKeyDown (KeyCode.Space))
 							{
 								Count = 3;
 								pullPower += 3;
@@ -382,9 +523,9 @@ public class Player2 : MonoBehaviour
 						break;
 					}
 
-
 					if (pullPower >= 8.0f) 
 					{
+						anim.SetBool ("test", true);
 						vertical = 20;
 						obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
 						ObjChild.GetComponent<BoxCollider2D> ().enabled = true;
@@ -392,6 +533,10 @@ public class Player2 : MonoBehaviour
 						obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 						obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
 						pullFlag = false;
+					} 
+					else 
+					{
+						anim.SetBool ("test", false);
 					}
 					RoZ += RoSpeed;
 
@@ -495,6 +640,11 @@ public class Player2 : MonoBehaviour
 					Rotation.y = 0;
 					Position.x -= SPEED.x;
 					state = State.Initializ;
+					anim.SetBool ("walk", true);
+				}
+				else
+				{
+					anim.SetBool ("walk", false);
 				}
 
 				if (Input.GetKey (KeyCode.RightArrow)) 
@@ -502,6 +652,11 @@ public class Player2 : MonoBehaviour
 					Rotation.y = 180;
 					Position.x += SPEED.x;
 					state = State.Initializ;
+					anim.SetBool ("walk", true);
+				}
+				else
+				{
+					anim.SetBool ("walk", false);
 				}
 			}
 
