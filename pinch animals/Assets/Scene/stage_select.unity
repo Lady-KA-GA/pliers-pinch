@@ -158,19 +158,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 106324844}
---- !u!114 &140309724
+--- !u!114 &140309724 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11462092, guid: 5ba6d7887482b482e8590061567b9fa8,
     type: 2}
   m_PrefabInternal: {fileID: 381219002}
-  m_GameObject: {fileID: 1411144187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82226a864b3644950bc46c217a6feb0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextScene: stage1
 --- !u!1 &236366023
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,11 +299,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11462092, guid: 5ba6d7887482b482e8590061567b9fa8, type: 2}
       propertyPath: nextScene
-      value: stage1
+      value: Explain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ba6d7887482b482e8590061567b9fa8, type: 2}
-  m_RootGameObject: {fileID: 1411144187}
   m_IsPrefabParent: 0
 --- !u!1 &455695672
 GameObject:
@@ -761,75 +753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d0eb769ac25427092e345c7bd1e0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1411144187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 173330, guid: 5ba6d7887482b482e8590061567b9fa8, type: 2}
-  m_PrefabInternal: {fileID: 381219002}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1411144188}
-  - 114: {fileID: 140309724}
-  m_Layer: 0
-  m_Name: SceneChange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1411144188
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 447750, guid: 5ba6d7887482b482e8590061567b9fa8, type: 2}
-  m_PrefabInternal: {fileID: 381219002}
-  m_GameObject: {fileID: 1411144187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
---- !u!1 &1648563381
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 103924, guid: 4e6a6b60bb9b142a9a5843fb93d86e52, type: 2}
-  m_PrefabInternal: {fileID: 1734281093}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1648563383}
-  - 114: {fileID: 1648563382}
-  m_Layer: 0
-  m_Name: FadeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1648563382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11476734, guid: 4e6a6b60bb9b142a9a5843fb93d86e52,
-    type: 2}
-  m_PrefabInternal: {fileID: 1734281093}
-  m_GameObject: {fileID: 1648563381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495ce7f0ff2054d6cb70af92e8648ba7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
---- !u!4 &1648563383
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 487242, guid: 4e6a6b60bb9b142a9a5843fb93d86e52, type: 2}
-  m_PrefabInternal: {fileID: 1734281093}
-  m_GameObject: {fileID: 1648563381}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
 --- !u!1001 &1734281093
 Prefab:
   m_ObjectHideFlags: 0
@@ -871,7 +794,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e6a6b60bb9b142a9a5843fb93d86e52, type: 2}
-  m_RootGameObject: {fileID: 1648563381}
   m_IsPrefabParent: 0
 --- !u!1 &1834395089
 GameObject:

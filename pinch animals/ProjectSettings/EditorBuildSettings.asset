@@ -7,12 +7,14 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scene/title.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/stage_select.unity
-  - enabled: 0
-    path: Assets/Scene/stage1.unity
+  - enabled: 1
+    path: Assets/Scene/Explain.unity
   - enabled: 1
     path: Assets/Scene/stage1_mukai.unity
+  - enabled: 1
+    path: Assets/Scene/stage1.unity
   - enabled: 1
     path: Assets/Scene/stage2_mukai.unity
   - enabled: 1

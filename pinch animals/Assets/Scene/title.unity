@@ -347,7 +347,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11462092, guid: 5ba6d7887482b482e8590061567b9fa8, type: 2}
       propertyPath: nextScene
-      value: stage1_mukai
+      value: stage_select
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ba6d7887482b482e8590061567b9fa8, type: 2}
