@@ -15,14 +15,10 @@ public class camera : MonoBehaviour
 	{
 		transform.position = new Vector3 (player.transform.position.x, 0, -10);
 	
-		if (transform.position.x < 0)
+		if (transform.position.x < -20)
 		{
-			transform.position = new Vector3 (0, 0, -10);
+			transform.position = new Vector3 (-20, 0, -10);
 		}
 
-		if (transform.position.x >= 45)
-		{
-			transform.position = new Vector3 (45, 0, -10);
-		}
 	}
 }

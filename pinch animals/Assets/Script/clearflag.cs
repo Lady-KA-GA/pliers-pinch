@@ -31,5 +31,10 @@ public class clearflag : MonoBehaviour
 			Check = true;
 			ClearFlag.gameObject.SetActive (true);
 		}
+	/*	if (flag1 == true) 
+		{
+			Check = true;
+			ClearFlag.gameObject.SetActive (true);
+		}*/
 	}
 }

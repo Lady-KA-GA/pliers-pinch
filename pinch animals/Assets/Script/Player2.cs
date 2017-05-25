@@ -98,6 +98,8 @@ public class Player2 : MonoBehaviour
 
 	bool coolFlag;
 
+	bool FuncFlag;
+
 	public enum State
 	{
 		Start,
@@ -164,6 +166,12 @@ public class Player2 : MonoBehaviour
 
 		hardState = HardState.GaugeStart;
 
+		FuncFlag = false;
+
+		horizon = 0;
+
+		vertical = 0;
+
 	}
 
 	void ObjInit()
@@ -181,13 +189,13 @@ public class Player2 : MonoBehaviour
 			{
 			case Type.kub:
 
-				if (Flag && (PowerPre >= 0.0f && PowerPre <= 1.4f))
+				if (Flag && (PowerPre >= 0.0f && PowerPre <= 1.49f))
 				{
 					MainSpriteRenderer.sprite = damage;
 					HitPointFunction ();
 					Flag = false;
 				}
-				if (Flag && (PowerPre >= 1.5f && PowerPre <= 3.0f)) 
+				if (Flag && (PowerPre >= 1.50f && PowerPre <= 3.00f)) 
 				{
 					anim.SetBool ("test", true);
 
@@ -202,7 +210,7 @@ public class Player2 : MonoBehaviour
 				{
 					anim.SetBool ("test", false);
 				}
-				if (Flag && (PowerPre >= 3.1f && PowerPre <= 10)) 
+				if (Flag && (PowerPre >= 3.001f && PowerPre <= 10.00f)) 
 				{
 					HitPointFunction ();
 					Flag = false;
@@ -212,50 +220,56 @@ public class Player2 : MonoBehaviour
 				break;
 
 			case Type.pile:
-				//クールタイムの実装完了
-				//見た目的に分からないのに変わりは無い。
-				//案1）パワコンゲージを少しずつ増やしていき、一定まで貯まると開始される様な見た目
 				switch (hardState) 
 				{
 				case HardState.GaugeStart:
-					if (Flag && (PowerPre >= 0.0f && PowerPre <= 4.2f)) 
+					if (Flag && (PowerPre >= 0.0f && PowerPre <= 4.29f)) 
 					{
 						MainSpriteRenderer.sprite = damage;
 						HitPointFunction ();
 						Flag = false;
 						hardState = HardState.Initializ;
 					}
-					if (Flag && (PowerPre >= 4.3f && PowerPre <= 5.7f)) 
+					if (Flag && (PowerPre >= 4.30f && PowerPre <= 5.69f)) 
 					{
 						Flag = false;
 						pullFlag = true;
 						pullPower = 0;
 						hardState = HardState.Wait;
 					}
-					if (Flag && (PowerPre >= 5.8f && PowerPre <= 10)) 
+					if (Flag && (PowerPre >= 5.70f && PowerPre <= 10.00f)) 
 					{
 						HitPointFunction ();
 						Flag = false;
 						hardState = HardState.Initializ;
 					}
 					break;
+
 				case HardState.Wait:
-					
-					CoolTime -= Time.deltaTime;
-					pullPower = pullPower + (Time.deltaTime * 5);
-					if (CoolTime <= 0.0f) 
+					if (pullFlag == true) 
 					{
-						CoolTime = 1.0f;
-						hardState = HardState.ControlStart;
+						CoolTime -= Time.deltaTime;
+						pullPower = pullPower + (Time.deltaTime * 5);
+						if (CoolTime <= 0.0f)
+						{
+							CoolTime = 1.0f;
+							hardState = HardState.ControlStart;
+						}
+						pullSlider.value = pullPower;
 					}
-					pullSlider.value = pullPower;
+					else
+					{
+						hardState = HardState.Initializ;
+					}
 					break;
+
 				case HardState.ControlStart:
 
 					if (pullFlag == true) 
 					{
+						FuncFlag = true;
 						Numbel.SetActive (true);
-						if (Input.GetKeyDown (KeyCode.Space)) 
+						if (Input.GetKeyDown (KeyCode.Space))
 						{
 							pullPower += pullSpeed;
 						} 
@@ -264,157 +278,82 @@ public class Player2 : MonoBehaviour
 							pullPower -= 0.08f;
 						}
 
-						if (pullPower <= 2.9f) 
+						if (FuncFlag == true) 
 						{
-							//pullFlag = false;
-							HitPointFunction ();
-							pullPower = 5;
-						}
-						if (pullPower >= 7.1f) 
-						{
-							//pullFlag = false;
-							HitPointFunction ();
-							pullPower = 5;
-						}
+							if (pullPower <= 2.9f)
+							{
+								HitPointFunction ();
+								hardState = HardState.Initializ;
+								FuncFlag = false;
+								pullFlag = false;
+							}
+							if (pullPower >= 7.1f)
+							{
+								HitPointFunction ();
+								hardState = HardState.Initializ;
+								FuncFlag = false;
+								pullFlag = false;
+							}
 
-						if (pullPower >= 3.0f && pullPower <= 7.0f) 
-						{
-							PullTime += Time.deltaTime;
-						}
+							if (pullPower >= 3.0f && pullPower <= 7.0f)
+							{
+								PullTime += Time.deltaTime;
+								FuncFlag = false;
+							}
 
-						if (PullTime >= 3) 
-						{
-							anim.SetBool ("test", true);
-							vertical = 20;
-							horizon = -5;
-							PullTime = 0;
-							pullPower = 5;
-							obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
-							ObjChild.GetComponent<PolygonCollider2D> ().enabled = true;
-							obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (horizon, vertical, 0);
-							obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
+							if (PullTime >= 3.0f)
+							{
+								anim.SetBool ("test", true);
+								vertical = 30;
+								horizon = -10;
+								PullTime = 0;
+								pullPower = 5;
+								ObjChild.GetComponent<CircleCollider2D> ().enabled = true;
+								obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+								ObjChild.GetComponent<PolygonCollider2D> ().enabled = true;
+								obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (horizon, vertical, 0);
+								obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
 
-							pullFlag = false;
-							Numbel.SetActive (false);
-							hardState = HardState.Initializ;
-						} 
-						else
-						{
-							anim.SetBool ("test", false);
+								pullFlag = false;
+								Numbel.SetActive (false);
+								hardState = HardState.Initializ;
+							}
+							else
+							{
+								anim.SetBool ("test", false);
+							}
 						}
 						pullSlider.value = pullPower;
 					}
-					JudgeF = ObjChild.GetComponent<PolygonCollider2D> ().enabled;
+					else 
+					{
 
+					}
+
+					JudgeF = ObjChild.GetComponent<PolygonCollider2D> ().enabled;
 					break;
+
 				case HardState.Initializ:
 
 					PowerPre = 0;	
-					hardState = HardState.ControlStart;
+					hardState = HardState.GaugeStart;
+
 					break;
 				default:
 					break;
 				}
 
-
-
-/*				if (Flag && (PowerPre >= 0.0f && PowerPre <= 4.2f)) 
-				{
-					MainSpriteRenderer.sprite = damage;
-					HitPointFunction ();
-					Flag = false;
-				}
-				if (Flag && (PowerPre >= 4.3f && PowerPre <= 5.7f)) 
-				{
-					Flag = false;
-					pullFlag = true;
-					pullPower = 5;
-				}
-				if (Flag && (PowerPre >= 5.8f && PowerPre <= 10)) 
-				{
-					HitPointFunction ();
-					Flag = false;
-				}
-					
-				if (pullFlag == true) 
-				{
-					CoolTime -= Time.deltaTime;
-				}
-
-				if (CoolTime <= 0.0f) 
-				{
-					CoolTime = 1.0f;
-					pullFlag = false;
-				}
-					//クールタイム適用
-					//ゲージに遷移しない等の不具合
-				if (pullFlag == true && coolFlag == true) 
-				{
-					Numbel.SetActive (true);
-					if (Input.GetKeyDown (KeyCode.Space)) 
-					{
-						pullPower += pullSpeed;
-					} 
-					else 
-					{
-						pullPower -= 0.08f;
-					}
-
-					if (pullPower <= 2.9f)
-					{
-						//pullFlag = false;
-						HitPointFunction ();
-						pullPower = 5;
-					}
-					if (pullPower >= 7.1f) 
-					{
-						//pullFlag = false;
-						HitPointFunction ();
-						pullPower = 5;
-					}
-
-					if (pullPower >= 3.0f && pullPower <= 7.0f) 
-					{
-						PullTime += Time.deltaTime;
-					}
-
-					if (PullTime >= 3) 
-					{
-						anim.SetBool ("test", true);
-						vertical = 20;
-						horizon = -5;
-						PullTime = 0;
-						pullPower = 5;
-						obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
-						ObjChild.GetComponent<PolygonCollider2D> ().enabled = true;
-						obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (horizon, vertical, 0);
-						obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
-
-						//pullFlag = false;
-						Numbel.SetActive (false);
-					} 
-					else 
-					{
-						anim.SetBool ("test", false);
-					}
-					pullSlider.value = pullPower;
-				}
-
-				JudgeF = ObjChild.GetComponent<PolygonCollider2D> ().enabled;
-
-				PowerPre = 0;
-*/
 				break;
 
 			case Type.pole:
-				if (Flag && (PowerPre >= 0.0f && PowerPre <= 7.1f)) 
+				if (Flag && (PowerPre >= 0.0f && PowerPre <= 6.99f)) 
 				{
 					//PlayerHP.SetActive (false);
 					HitPointFunction ();
 					Flag = false;
 				}
 
-				if (Flag && (PowerPre >= 7.0f && PowerPre <= 8.5f)) 
+				if (Flag && (PowerPre >= 7.00f && PowerPre <= 8.49f)) 
 				{
 					Flag = false;
 					pullFlag = true;
@@ -425,7 +364,7 @@ public class Player2 : MonoBehaviour
 
 				}
 
-				if (Flag && (PowerPre >= 8.6f && PowerPre <= 10)) 
+				if (Flag && (PowerPre >= 8.50f && PowerPre <= 10.00f)) 
 				{
 					HitPointFunction ();
 					Flag = false;
@@ -635,16 +574,13 @@ public class Player2 : MonoBehaviour
 
 			if (pullFlag == false)
 			{
+				bool WalkFlag = false;
 				if (Input.GetKey (KeyCode.LeftArrow)) 
 				{
 					Rotation.y = 0;
 					Position.x -= SPEED.x;
 					state = State.Initializ;
-					anim.SetBool ("walk", true);
-				}
-				else
-				{
-					anim.SetBool ("walk", false);
+					WalkFlag = true;
 				}
 
 				if (Input.GetKey (KeyCode.RightArrow)) 
@@ -652,6 +588,11 @@ public class Player2 : MonoBehaviour
 					Rotation.y = 180;
 					Position.x += SPEED.x;
 					state = State.Initializ;
+					WalkFlag = true;
+				}
+
+				if (WalkFlag == true) 
+				{
 					anim.SetBool ("walk", true);
 				}
 				else

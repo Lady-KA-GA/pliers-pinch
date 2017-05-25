@@ -40,25 +40,13 @@ public class SceneChange : MonoBehaviour
 					ChangeScene ();
 				}
 				break;
-			case "stage_select":
-		/*		if (Input.GetMouseButtonDown (0))
+			case "description":
+				if (Input.GetKeyDown ("space"))
 				{
-					ChangeScene();
-				}*/
+					ChangeScene ();
+				}
 				break;
 			case "stage1_mukai":
-				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
-				{
-					ChangeScene ();
-				}
-				break;
-			case "stage2_mukai":
-				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
-				{
-					ChangeScene ();
-				}
-				break;
-			case "stage3":
 				if ((clearFlag == true || overFlag == true) && Input.GetKeyDown(KeyCode.Space))
 				{
 					ChangeScene ();
