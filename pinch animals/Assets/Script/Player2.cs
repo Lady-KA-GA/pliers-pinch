@@ -98,6 +98,8 @@ public class Player2 : MonoBehaviour
 
 	bool coolFlag;
 
+	private AudioSource hasamu_se;
+
 	public enum State
 	{
 		Start,
@@ -164,6 +166,7 @@ public class Player2 : MonoBehaviour
 
 		hardState = HardState.GaugeStart;
 
+		hasamu_se = GetComponent<AudioSource>();
 	}
 
 	void ObjInit()
@@ -574,6 +577,7 @@ public class Player2 : MonoBehaviour
 						{
 							MainSpriteRenderer.sprite = pinch1;
 							state = State.Interpose;
+								hasamu_se.PlayOneShost(hasamu_se.clip);
 						}
 						else
 						{
