@@ -12,11 +12,14 @@ public class SceneChange : MonoBehaviour
 	bool clearFlag;
 	bool overFlag;
 
+	private AudioSource space_se;//スペースキーになるSE
+
 	void Start ()
     {
       //  AudioManager.Instance.PlayBGM("");
        // AudioManager.Instance.PlaySE("");
         //nextScene = null;
+		 space_se = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -80,11 +83,13 @@ public class SceneChange : MonoBehaviour
     }
 	public void ChangeScene() 
 	{
+		space_se.PlayOneShot(space_se.clip);
 		FadeManager.Instance.LoadLevel(nextScene, 0.5f);
             Moved = true;        
     }
 	public void StringArgFunction(string s)
 	{
+		space_se.PlayOneShot(space_se.clip);
 		SceneManager.LoadScene (s);
 	}
 }
