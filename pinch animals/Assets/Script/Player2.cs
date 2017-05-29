@@ -82,7 +82,6 @@ public class Player2 : MonoBehaviour
 	Vector3 vec;
 
 	GameObject ObjChild;
-	GameObject PosObj;
 
 	GameObject ObjPre;
 
@@ -99,6 +98,20 @@ public class Player2 : MonoBehaviour
 	bool coolFlag;
 
 	bool FuncFlag;
+
+	public GameObject lage;
+	public GameObject mid;
+	public GameObject smool;
+
+	public GameObject nice;
+	public GameObject bad;
+
+	private float nextTime;
+	public float interval = 1.0f;	// 点滅周期
+
+	bool DamageFlag;
+
+	bool pinchFlag;
 
 	public enum State
 	{
@@ -136,7 +149,6 @@ public class Player2 : MonoBehaviour
 		Power = 0;
 		PowerPre = 0;
 		pullPower = 0;
-		//Speed = 0.3f;
 		pullSpeed = 1.2f;
 		rigid2D = GetComponent<Rigidbody2D>();//同じゲームオブジェクト貼られているリジッドボディへの参照（ポインタ）を取得
 		Flag=false;
@@ -154,8 +166,6 @@ public class Player2 : MonoBehaviour
 
 		RoZ = 0;
 
-		PosObj = GameObject.Find ("pos");
-
 		RoSpeed = 1;
 
 		JudgeF = false;
@@ -172,6 +182,9 @@ public class Player2 : MonoBehaviour
 
 		vertical = 0;
 
+		nextTime = Time.time;
+
+		pinchFlag = false;
 	}
 
 	void ObjInit()
@@ -188,16 +201,22 @@ public class Player2 : MonoBehaviour
 			switch (type) 
 			{
 			case Type.kub:
-
-				if (Flag && (PowerPre >= 0.0f && PowerPre <= 1.49f))
+				
+				if (Flag && (PowerPre >= 0.0f && PowerPre <= 0.99f)) 
 				{
+					DamageFlag = true;
+					nice.SetActive (false);
+					bad.SetActive (true);
 					MainSpriteRenderer.sprite = damage;
 					HitPointFunction ();
 					Flag = false;
 				}
-				if (Flag && (PowerPre >= 1.50f && PowerPre <= 3.00f)) 
+				if (Flag && (PowerPre >= 1.00f && PowerPre <= 3.00f)) 
 				{
-					anim.SetBool ("test", true);
+					nice.SetActive (true);
+					bad.SetActive (false);
+
+					anim.SetTrigger ("nuke");
 
 					vertical = 20;
 					ObjChild.GetComponent<CircleCollider2D> ().enabled = true;
@@ -206,39 +225,55 @@ public class Player2 : MonoBehaviour
 					obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
 					Flag = false;
 				} 
-				else 
-				{
-					anim.SetBool ("test", false);
-				}
+
 				if (Flag && (PowerPre >= 3.001f && PowerPre <= 10.00f)) 
 				{
+					DamageFlag = true;
+					nice.SetActive (false);
+					bad.SetActive (true);
+
 					HitPointFunction ();
 					Flag = false;
 				}
+
 				JudgeF = ObjChild.GetComponent<CircleCollider2D> ().enabled;
 
 				break;
 
 			case Type.pile:
-				switch (hardState) 
+
+				switch (hardState)
 				{
 				case HardState.GaugeStart:
-					if (Flag && (PowerPre >= 0.0f && PowerPre <= 4.29f)) 
+					if (Flag && (PowerPre >= 0.0f && PowerPre <= 3.99f)) 
 					{
+						DamageFlag = true;
+						nice.SetActive (false);
+						bad.SetActive (true);
+
 						MainSpriteRenderer.sprite = damage;
 						HitPointFunction ();
 						Flag = false;
 						hardState = HardState.Initializ;
 					}
-					if (Flag && (PowerPre >= 4.30f && PowerPre <= 5.69f)) 
+					if (Flag && (PowerPre >= 4.00f && PowerPre <= 6.00f)) 
 					{
+						nice.SetActive (true);
+						bad.SetActive (false);
+
+						pinchFlag = true;
+
 						Flag = false;
 						pullFlag = true;
 						pullPower = 0;
 						hardState = HardState.Wait;
 					}
-					if (Flag && (PowerPre >= 5.70f && PowerPre <= 10.00f)) 
+					if (Flag && (PowerPre >= 6.01f && PowerPre <= 10.00f)) 
 					{
+						DamageFlag = true;
+						nice.SetActive (false);
+						bad.SetActive (true);
+
 						HitPointFunction ();
 						Flag = false;
 						hardState = HardState.Initializ;
@@ -257,7 +292,7 @@ public class Player2 : MonoBehaviour
 						}
 						pullSlider.value = pullPower;
 					}
-					else
+					else 
 					{
 						hardState = HardState.Initializ;
 					}
@@ -265,14 +300,14 @@ public class Player2 : MonoBehaviour
 
 				case HardState.ControlStart:
 
-					if (pullFlag == true) 
+					if (pullFlag == true)
 					{
 						FuncFlag = true;
 						Numbel.SetActive (true);
-						if (Input.GetKeyDown (KeyCode.Space))
+						if (Input.GetKeyDown (KeyCode.Space)) 
 						{
 							pullPower += pullSpeed;
-						} 
+						}
 						else 
 						{
 							pullPower -= 0.08f;
@@ -280,15 +315,12 @@ public class Player2 : MonoBehaviour
 
 						if (FuncFlag == true) 
 						{
-							if (pullPower <= 2.9f)
+							if (pullPower <= 2.9f) 
 							{
-								HitPointFunction ();
-								hardState = HardState.Initializ;
-								FuncFlag = false;
-								pullFlag = false;
-							}
-							if (pullPower >= 7.1f)
-							{
+								DamageFlag = true;
+								nice.SetActive (false);
+								bad.SetActive (true);
+
 								HitPointFunction ();
 								hardState = HardState.Initializ;
 								FuncFlag = false;
@@ -297,13 +329,31 @@ public class Player2 : MonoBehaviour
 
 							if (pullPower >= 3.0f && pullPower <= 7.0f)
 							{
+								nice.SetActive (true);
+								bad.SetActive (false);
 								PullTime += Time.deltaTime;
 								FuncFlag = false;
 							}
 
+							if (pullPower >= 7.1f) 
+							{
+								DamageFlag = true;
+								nice.SetActive (false);
+								bad.SetActive (true);
+
+								HitPointFunction ();
+								hardState = HardState.Initializ;
+								FuncFlag = false;
+								pullFlag = false;
+							}
+
 							if (PullTime >= 3.0f)
 							{
-								anim.SetBool ("test", true);
+								nice.SetActive (true);
+								bad.SetActive (false);
+
+								anim.SetTrigger ("nuke");
+
 								vertical = 30;
 								horizon = -10;
 								PullTime = 0;
@@ -318,18 +368,10 @@ public class Player2 : MonoBehaviour
 								Numbel.SetActive (false);
 								hardState = HardState.Initializ;
 							}
-							else
-							{
-								anim.SetBool ("test", false);
-							}
+
+							pullSlider.value = pullPower;
 						}
-						pullSlider.value = pullPower;
 					}
-					else 
-					{
-
-					}
-
 					JudgeF = ObjChild.GetComponent<PolygonCollider2D> ().enabled;
 					break;
 
@@ -346,150 +388,207 @@ public class Player2 : MonoBehaviour
 				break;
 
 			case Type.pole:
-				if (Flag && (PowerPre >= 0.0f && PowerPre <= 6.99f)) 
-				{
-					//PlayerHP.SetActive (false);
-					HitPointFunction ();
-					Flag = false;
-				}
 
-				if (Flag && (PowerPre >= 7.00f && PowerPre <= 8.49f)) 
+				Vector2 PosVec = obj.transform.position;
+				PosVec.y = 2.96f;
+
+				switch (hardState)
 				{
-					Flag = false;
-					pullFlag = true;
+				case HardState.GaugeStart:
+					if (Flag && (PowerPre >= 0.00f && PowerPre <= 6.99f)) 
+					{
+						DamageFlag = true;
+						nice.SetActive (false);
+						bad.SetActive (true);
+
+						HitPointFunction ();
+						Flag = false;
+						hardState = HardState.Initializ;
+					}
+
+					if (Flag && (PowerPre >= 7.00f && PowerPre <= 9.00f)) 
+					{
+						nice.SetActive (true);
+						bad.SetActive (false);
+
+						hardState = HardState.Wait;
+						Flag = false;
+						pullFlag = true;
+						pullPower = 0;
+						Count = 0;
+
+						obj.GetComponent<EdgeCollider2D> ().enabled = true;
+						hardState = HardState.Wait;
+					}
+
+					if (Flag && (PowerPre >= 9.01f && PowerPre <= 10.00f)) 
+					{
+						DamageFlag = true;
+						nice.SetActive (false);
+						bad.SetActive (true);
+						HitPointFunction ();
+						Flag = false;
+						hardState = HardState.Initializ;
+					}
+					break;
+
+				case HardState.Wait:
+					if (pullFlag == true)
+					{
+						hardState = HardState.ControlStart;
+					}
+					break;
+
+				case HardState.ControlStart:
+					if (pullFlag == true)
+					{
+						int Ang0 = 10;
+						int Ang1 = 16;
+						int Ang2 = 21;
+						int Ang3 = 26;
+
+						switch (Count) 
+						{
+						case 0:
+							lage.SetActive (true);
+							lage.transform.position = PosVec;
+							if (RoZ >= Ang0) 
+							{
+								RoSpeed *= -1;
+							}
+							if (RoZ <= Ang0 * -1) 
+							{
+								RoSpeed *= -1;
+							}
+							
+							if (Input.GetKeyDown (KeyCode.Space)) 
+							{
+								if (RoZ >= -7 && RoZ <= 7) 
+								{
+									nice.SetActive (true);
+									bad.SetActive (false);
+
+									Count += 1;
+									pullPower += 3;
+									lage.SetActive (false);
+								} 
+								else
+								{
+									DamageFlag = true;
+
+									nice.SetActive (false);
+									bad.SetActive (true);
+
+									HitPointFunction ();
+									hardState = HardState.Initializ;
+								}
+
+							}
+							break;
+
+						case 1:
+							mid.SetActive (true);
+							mid.transform.position = PosVec;
+							if (RoZ >= Ang1) 
+							{
+								RoSpeed *= -1;
+							}
+							if (RoZ <= Ang1 * -1) 
+							{
+								RoSpeed *= -1;
+							}
+							if (Input.GetKeyDown (KeyCode.Space)) 
+							{
+								if (RoZ >= -3 && RoZ <= 3) 
+								{
+									Count += 1;
+									pullPower += 3;
+									mid.SetActive (false);
+								} 
+								else
+								{
+									DamageFlag = true;
+
+									nice.SetActive (false);
+									bad.SetActive (true);
+
+									HitPointFunction ();
+									hardState = HardState.Initializ;
+								}
+							}
+							break;
+
+						case 2:
+							smool.SetActive (true);
+							smool.transform.position = PosVec;
+							if (RoZ >= Ang2)
+							{
+								RoSpeed *= -1;
+							}
+							if (RoZ <= Ang2 * -1)
+							{
+								RoSpeed *= -1;
+							}
+
+							if (Input.GetKeyDown (KeyCode.Space))
+							{
+								if (RoZ >= -1 && RoZ <= 1) 
+								{
+									Count += 1;
+									pullPower += 4;
+									smool.SetActive (false);
+								}
+								else 
+								{
+									DamageFlag = true;
+
+									nice.SetActive (false);
+									bad.SetActive (true);
+
+									HitPointFunction ();
+									hardState = HardState.Initializ;
+								}
+							}
+							break;
+						case 3:
+							if (pullPower >= 10.0f) 
+							{
+								anim.SetTrigger ("nuke");
+								vertical = 20;
+								obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
+								ObjChild.GetComponent<BoxCollider2D> ().enabled = true;
+								ObjChild.GetComponent<CircleCollider2D> ().enabled = true;
+								obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
+								obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
+								pullFlag = false;
+								hardState = HardState.Initializ;
+							}
+							break;
+						default:
+							break;
+						}
+						RoZ += RoSpeed;
+
+						pullSlider.value = pullPower;
+
+						Vector3 RVec = new Vector3 (0.0f, 0.0f, RoZ);
+
+						obj.transform.eulerAngles = RVec;
+					}
+					break;
+
+				case HardState.Initializ:
+					RoZ = 0;
 					pullPower = 0;
 					Count = 0;
 
-					obj.GetComponent<EdgeCollider2D> ().enabled = true;
-
+					hardState = HardState.GaugeStart;
+					break;
 				}
-
-				if (Flag && (PowerPre >= 8.50f && PowerPre <= 10.00f)) 
-				{
-					HitPointFunction ();
-					Flag = false;
-				}
-					
-				if (pullFlag == true) 
-				{
-					int Ang0 = 7;
-					int Ang1 = 13;
-					int Ang2 = 19;
-					int Ang3 = 24;
-
-					switch (Count)
-					{
-					case 0:
-						if (RoZ >= Ang0)
-						{
-							RoSpeed *= -1;
-						}
-						if (RoZ <= Ang0 * -1) 
-						{
-							RoSpeed *= -1;
-						}
-
-						if (RoZ >= -5 && RoZ <= 5)
-						{
-							if (Input.GetKeyDown (KeyCode.Space))
-							{
-								Count = 1;
-								pullPower += 2;
-							}
-						}
-
-						break;
-
-					case 1:
-						if (RoZ >= Ang1)
-						{
-							RoSpeed *= -1;
-						}
-						if (RoZ <= Ang1 * -1)
-						{
-							RoSpeed *= -1;
-						}
-
-						if (RoZ >= -3 && RoZ <= 3)
-						{
-							if (Input.GetKeyDown (KeyCode.Space))
-							{
-								Count = 2;
-								pullPower += 2;
-							}
-						}
-						break;
-
-					case 2:
-						if (RoZ >= Ang2) 
-						{
-							RoSpeed *= -1;
-						}
-						if (RoZ <= Ang2 * -1) 
-						{
-							RoSpeed *= -1;
-						}
-
-						if (RoZ >= -1 && RoZ <= 1)
-						{
-							if (Input.GetKeyDown (KeyCode.Space))
-							{
-								Count = 3;
-								pullPower += 3;
-							}
-						}
-						break;
-					case 3:
-						if (RoZ >= Ang3)
-						{
-							RoSpeed *= -1;
-						}
-						if (RoZ <= Ang3 * -1)
-						{
-							RoSpeed *= -1;
-						}
-
-						if (RoZ >= -1 && RoZ <= 1)
-						{
-							if (Input.GetKeyDown (KeyCode.Space))
-							{
-								Count = 3;
-								pullPower += 3;
-							}
-						}
-						break;
-					default:
-						break;
-					}
-
-					if (pullPower >= 8.0f) 
-					{
-						anim.SetBool ("test", true);
-						vertical = 20;
-						obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
-						ObjChild.GetComponent<BoxCollider2D> ().enabled = true;
-						ObjChild.GetComponent<CircleCollider2D> ().enabled = true;
-						obj.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
-						obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
-						pullFlag = false;
-					} 
-					else 
-					{
-						anim.SetBool ("test", false);
-					}
-					RoZ += RoSpeed;
-
-					Vector3 RVec = new Vector3 (0.0f, 0.0f, RoZ);
-
-					PosObj.transform.eulerAngles = RVec;
-
-				}
-				JudgeF = ObjChild.GetComponent<BoxCollider2D> ().enabled;
-				PowerPre = 0;
-				pullSlider.value = pullPower;
 				break;
-			default:
-				break;
+
+				default:
+					break;
 			}
 		}
 	}
@@ -499,113 +598,126 @@ public class Player2 : MonoBehaviour
 		poseFlag = Pose.i;
 		Vector2 Position = transform.position;
 		Vector2 Rotation = transform.eulerAngles;
-
-		if (poseFlag == false)
+		if (obj != null) 
 		{
-			if (obj != null)
+			switch (state) 
 			{
-				switch (state)
+			case State.Start:
+				if (pullFlag != true) 
 				{
-				case State.Start:
-					if (pullFlag != true)
+					if (Input.GetKeyDown (KeyCode.Space)) 
 					{
-						if (Input.GetKeyDown (KeyCode.Space))
-						{
-							MainSpriteRenderer.sprite = pinch1;
-							state = State.Interpose;
-						}
-						else
-						{
-							MainSpriteRenderer.sprite = walk;
-						}
-					}
-
-					break;
-				case State.Interpose:
-					aura.SetActive (true);
-					if (Power >= 10)
+						MainSpriteRenderer.sprite = pinch1;
+						state = State.Interpose;
+					} 
+					else 
 					{
-						Speed *= -1;
+						MainSpriteRenderer.sprite = walk;
 					}
-
-					if (Power <= -1) 
-					{
-						Speed *= -1;
-					}
-					if (Power >= 0f && Power <= 3.0f) 
-					{						
-						auraSprRend.sprite = auraSpr1;
-
-					}
-					if (Power >= 3.1f && Power <= 7.0f)
-					{						
-						auraSprRend.sprite = auraSpr2;
-					}
-					if (Power >= 7.1f && Power <= 10f) 
-					{						
-						auraSprRend.sprite = auraSpr3;
-					}
-
-					auraSprRend.color = Color.Lerp (Color.white, Color.red, (Power / 10));
-					vec.Set ((Power + 1) / 10, (Power + 1) / 10, (Power + 1) / 10);
-					if (Input.GetKeyDown (KeyCode.Space))
-					{
-						MainSpriteRenderer.sprite = nuki;
-						PowerPre = Power;
-						Flag = true;
-						state = State.Initializ;
-					}
-					Power += Speed;
-					_slider.value = Power;
-					aura.transform.localScale = vec;
-					break;
-				case State.Initializ:
-
-					Power = 0;
-					Speed = 0.3f;
-					state = State.Start;
-					aura.SetActive (false);	
-
-					break;
-				default:
-					break;
 				}
-			}
 
-			if (pullFlag == false)
-			{
-				bool WalkFlag = false;
-				if (Input.GetKey (KeyCode.LeftArrow)) 
+				break;
+			case State.Interpose:
+				aura.SetActive (true);
+				if (Power >= 10)
 				{
-					Rotation.y = 0;
-					Position.x -= SPEED.x;
+					Speed *= -1;
+				}
+
+				if (Power <= -1) 
+				{
+					Speed *= -1;
+				}
+				if (Power >= 0f && Power <= 3.0f) 
+				{						
+					auraSprRend.sprite = auraSpr1;
+
+				}
+				if (Power >= 3.1f && Power <= 7.0f)
+				{						
+					auraSprRend.sprite = auraSpr2;
+				}
+				if (Power >= 7.1f && Power <= 10f)
+				{						
+					auraSprRend.sprite = auraSpr3;
+				}
+
+				auraSprRend.color = Color.Lerp (Color.white, Color.red, (Power / 10));
+				vec.Set ((Power + 1) / 10, (Power + 1) / 10, (Power + 1) / 10);
+				if (Input.GetKeyDown (KeyCode.Space)) 
+				{
+					MainSpriteRenderer.sprite = nuki;
+					PowerPre = Power;
+					Flag = true;
 					state = State.Initializ;
-					WalkFlag = true;
 				}
+				Power += Speed;
+				_slider.value = Power;
+				aura.transform.localScale = vec;
+				break;
+			case State.Initializ:
 
-				if (Input.GetKey (KeyCode.RightArrow)) 
-				{
-					Rotation.y = 180;
-					Position.x += SPEED.x;
-					state = State.Initializ;
-					WalkFlag = true;
-				}
+				Power = 0;
+				Speed = 0.3f;
+				state = State.Start;
+				aura.SetActive (false);	
 
-				if (WalkFlag == true) 
-				{
-					anim.SetBool ("walk", true);
-				}
-				else
-				{
-					anim.SetBool ("walk", false);
-				}
+				break;
+			default:
+				break;
 			}
-
-			ObstacleUpdate ();
-
-			transform.position = Position;
-			transform.eulerAngles = Rotation;
 		}
+
+		if (pullFlag == false) 
+		{
+			bool WalkFlag = false;
+			if (Input.GetKey (KeyCode.LeftArrow))
+			{
+				Rotation.y = 0;
+				Position.x -= SPEED.x;
+				state = State.Initializ;
+				WalkFlag = true;
+			}
+
+			if (Input.GetKey (KeyCode.RightArrow)) 
+			{
+				Rotation.y = 180;
+				Position.x += SPEED.x;
+				state = State.Initializ;
+				WalkFlag = true;
+			}
+
+			if (WalkFlag == true) 
+			{
+				anim.SetBool ("walk", true);
+			} 
+			else 
+			{
+				anim.SetBool ("walk", false);
+			}
+		}
+
+		if (DamageFlag == true) 
+		{
+			if ( Time.time > nextTime ) 
+			{
+				anim.SetBool ("damage", true);
+				playspr.GetComponent<Renderer> ().enabled = !playspr.GetComponent<Renderer> ().enabled;
+
+				nextTime += interval;
+			}
+			else
+			{
+				anim.SetBool ("damage", false);
+				playspr.GetComponent<Renderer> ().enabled = true;
+				DamageFlag = false;
+			}
+		}
+
+		ObstacleUpdate ();
+
+		transform.position = Position;
+		transform.eulerAngles = Rotation;
 	}
 
 	void HitPointFunction()
@@ -614,17 +726,14 @@ public class Player2 : MonoBehaviour
 		{
 		case 1:
 			DeathFlag = true;
-			//Destroy (HP1);
 			HP1.SetActive (false);
 			HitPoint -= 1;
 			break;
 		case 2:
-			//Destroy (HP2);
 			HP2.SetActive (false);
 			HitPoint -= 1;
 			break;
 		case 3:
-			//Destroy (HP3);
 			HP3.SetActive (false);
 			HitPoint -= 1;
 			break;
@@ -642,14 +751,13 @@ public class Player2 : MonoBehaviour
 		}
 		else
 		{
-			
-			if (collider.gameObject.tag == "Soft") 
+			if (collider.gameObject.tag == "Soft")
 			{
 				obj = collider.gameObject;
 				kubProper.SetActive (true);
 				type = Type.kub;
 			} 
-			else if (collider.gameObject.tag=="Hard") 
+			else if (collider.gameObject.tag=="Hard")
 			{
 				obj = collider.gameObject;
 				pilePropel.SetActive (true);
@@ -660,6 +768,7 @@ public class Player2 : MonoBehaviour
 			else if (collider.gameObject.tag=="Huge")
 			{
 				obj = collider.gameObject;
+
 				polePropel.SetActive (true);
 				pullSliderObj.SetActive (true);
 				type = Type.pole;
@@ -691,6 +800,8 @@ public class Player2 : MonoBehaviour
 		if (sliderObj.activeInHierarchy == true) 
 		{
 			sliderObj.SetActive (false);
+			nice.SetActive (false);
+			bad.SetActive (false);
 		}
 		if (pullSliderObj.activeInHierarchy == true) 
 		{

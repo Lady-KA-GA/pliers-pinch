@@ -11,6 +11,9 @@ TagManager:
   - SoftRoot
   - HardRoot
   - HugeRoot
+  - lage
+  - mid
+  - smool
   layers:
   - Default
   - TransparentFX
