@@ -100,6 +100,10 @@ public class Player2 : MonoBehaviour
 
 	bool FuncFlag;
 
+	private AudioSource hasamu_se;
+
+	private AudioSource nuku_se;
+
 	public enum State
 	{
 		Start,
@@ -172,6 +176,9 @@ public class Player2 : MonoBehaviour
 
 		vertical = 0;
 
+		hasamu_se = GetComponent<AudioSource>();
+
+		nuku_se = GetComponent<AudioSource>();
 	}
 
 	void ObjInit()
@@ -193,7 +200,7 @@ public class Player2 : MonoBehaviour
 				{
 					MainSpriteRenderer.sprite = damage;
 					HitPointFunction ();
-					Flag = false;
+					Flag = false; 
 				}
 				if (Flag && (PowerPre >= 1.50f && PowerPre <= 3.00f)) 
 				{
@@ -205,6 +212,7 @@ public class Player2 : MonoBehaviour
 					obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
 					obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
 					Flag = false;
+
 				} 
 				else 
 				{
@@ -213,7 +221,7 @@ public class Player2 : MonoBehaviour
 				if (Flag && (PowerPre >= 3.001f && PowerPre <= 10.00f)) 
 				{
 					HitPointFunction ();
-					Flag = false;
+						Flag = false; Debug.Log("a");
 				}
 				JudgeF = ObjChild.GetComponent<CircleCollider2D> ().enabled;
 
@@ -513,7 +521,8 @@ public class Player2 : MonoBehaviour
 						{
 							MainSpriteRenderer.sprite = pinch1;
 							state = State.Interpose;
-						}
+							hasamu_se.PlayOneShot(hasamu_se.clip);//挟むSEを鳴らす
+							}
 						else
 						{
 							MainSpriteRenderer.sprite = walk;
