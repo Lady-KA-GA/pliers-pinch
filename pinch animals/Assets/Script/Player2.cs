@@ -202,7 +202,7 @@ public class Player2 : MonoBehaviour
 			{
 			case Type.kub:
 				
-				if (Flag && (PowerPre >= 0.0f && PowerPre <= 0.99f)) 
+				if (Flag && PowerPre <= 0.99f)
 				{
 					DamageFlag = true;
 					nice.SetActive (false);
@@ -216,7 +216,8 @@ public class Player2 : MonoBehaviour
 					nice.SetActive (true);
 					bad.SetActive (false);
 
-					anim.SetTrigger ("nuke");
+					anim.SetBool ("pinch", false);
+					anim.SetTrigger ("nuku");
 
 					vertical = 20;
 					ObjChild.GetComponent<CircleCollider2D> ().enabled = true;
@@ -226,7 +227,7 @@ public class Player2 : MonoBehaviour
 					Flag = false;
 				} 
 
-				if (Flag && (PowerPre >= 3.001f && PowerPre <= 10.00f)) 
+				if (Flag && PowerPre >= 3.001f)
 				{
 					DamageFlag = true;
 					nice.SetActive (false);
@@ -245,7 +246,7 @@ public class Player2 : MonoBehaviour
 				switch (hardState)
 				{
 				case HardState.GaugeStart:
-					if (Flag && (PowerPre >= 0.0f && PowerPre <= 3.99f)) 
+					if (Flag && PowerPre <= 3.99f)
 					{
 						DamageFlag = true;
 						nice.SetActive (false);
@@ -258,6 +259,7 @@ public class Player2 : MonoBehaviour
 					}
 					if (Flag && (PowerPre >= 4.00f && PowerPre <= 6.00f)) 
 					{
+
 						nice.SetActive (true);
 						bad.SetActive (false);
 
@@ -268,7 +270,7 @@ public class Player2 : MonoBehaviour
 						pullPower = 0;
 						hardState = HardState.Wait;
 					}
-					if (Flag && (PowerPre >= 6.01f && PowerPre <= 10.00f)) 
+					if (Flag && PowerPre >= 6.01f)
 					{
 						DamageFlag = true;
 						nice.SetActive (false);
@@ -349,10 +351,12 @@ public class Player2 : MonoBehaviour
 
 							if (PullTime >= 3.0f)
 							{
+
+								anim.SetBool ("pinch", false);
+								anim.SetTrigger ("nuku");
+
 								nice.SetActive (true);
 								bad.SetActive (false);
-
-								anim.SetTrigger ("nuke");
 
 								vertical = 30;
 								horizon = -10;
@@ -395,7 +399,7 @@ public class Player2 : MonoBehaviour
 				switch (hardState)
 				{
 				case HardState.GaugeStart:
-					if (Flag && (PowerPre >= 0.00f && PowerPre <= 6.99f)) 
+					if (Flag && PowerPre <= 6.99f)
 					{
 						DamageFlag = true;
 						nice.SetActive (false);
@@ -421,7 +425,7 @@ public class Player2 : MonoBehaviour
 						hardState = HardState.Wait;
 					}
 
-					if (Flag && (PowerPre >= 9.01f && PowerPre <= 10.00f)) 
+					if (Flag && PowerPre >= 9.01f) 
 					{
 						DamageFlag = true;
 						nice.SetActive (false);
@@ -553,7 +557,9 @@ public class Player2 : MonoBehaviour
 						case 3:
 							if (pullPower >= 10.0f) 
 							{
-								anim.SetTrigger ("nuke");
+								anim.SetBool ("pinch", false);
+								anim.SetTrigger ("nuku");
+
 								vertical = 20;
 								obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
 								ObjChild.GetComponent<BoxCollider2D> ().enabled = true;
@@ -607,6 +613,7 @@ public class Player2 : MonoBehaviour
 				{
 					if (Input.GetKeyDown (KeyCode.Space)) 
 					{
+						anim.SetBool ("pinch", true);
 						MainSpriteRenderer.sprite = pinch1;
 						state = State.Interpose;
 					} 
@@ -699,16 +706,16 @@ public class Player2 : MonoBehaviour
 
 		if (DamageFlag == true) 
 		{
+			anim.SetBool ("pinch", false);
+			anim.SetTrigger ("damage 0");
 			if ( Time.time > nextTime ) 
 			{
-				anim.SetBool ("damage", true);
 				playspr.GetComponent<Renderer> ().enabled = !playspr.GetComponent<Renderer> ().enabled;
 
 				nextTime += interval;
 			}
 			else
 			{
-				anim.SetBool ("damage", false);
 				playspr.GetComponent<Renderer> ().enabled = true;
 				DamageFlag = false;
 			}
