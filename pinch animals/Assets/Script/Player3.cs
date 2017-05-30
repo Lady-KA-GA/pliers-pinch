@@ -106,6 +106,7 @@ public class Player3 : MonoBehaviour
 		//0にすると失敗の判定を取られるのも注意
 		if (obj != null)
 		{
+			//sources[0].Play();
 			sound = obj.GetComponent<AudioSource> ();
 			switch (type)
 			{
@@ -143,7 +144,7 @@ public class Player3 : MonoBehaviour
 					{
 						//PlayerHP.SetActive (false);
 						HitPointFunction ();
-						Flag = false;
+							Flag = false; 
 					}
 					if (Flag && (PowerPre > 4.3f && PowerPre < 5.7f)) 
 					{
@@ -152,6 +153,7 @@ public class Player3 : MonoBehaviour
 						Flag = false;
 						pullFlag = true;
 						sound.PlayOneShot (sound.clip);
+
 					}
 					if (Flag && (PowerPre > 5.0f && PowerPre < 10)) 
 					{

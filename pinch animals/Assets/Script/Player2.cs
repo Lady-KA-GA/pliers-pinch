@@ -630,7 +630,7 @@ public class Player2 : MonoBehaviour
 						state = State.Interpose;
 							//hasamu_se.PlayOneShot(hasamu_se.clip);
 							sources[0].Play();
-							sources[1].Play();
+
 					} 
 					else 
 					{
@@ -778,6 +778,7 @@ public class Player2 : MonoBehaviour
 				obj = collider.gameObject;
 				kubProper.SetActive (true);
 				type = Type.kub;
+
 			} 
 			else if (collider.gameObject.tag=="Hard")
 			{
@@ -786,7 +787,7 @@ public class Player2 : MonoBehaviour
 				pile_pull_Proper.SetActive (true);
 				pullSliderObj.SetActive (true);
 				type = Type.pile;
-			}
+				}
 			else if (collider.gameObject.tag=="Huge")
 			{
 				obj = collider.gameObject;
@@ -795,6 +796,7 @@ public class Player2 : MonoBehaviour
 				pullSliderObj.SetActive (true);
 				type = Type.pole;
 			}
+
 		}
 	}
 
