@@ -237,6 +237,9 @@ public class Player2 : MonoBehaviour
 					obj.GetComponent<Rigidbody2D> ().angularVelocity = 1000.0f;
 					obj.GetComponent<Rigidbody2D> ().velocity = new Vector3 (obj.GetComponent<Rigidbody2D> ().velocity.x, vertical, 0);
 					Flag = false;
+
+					sources[1].Play();
+					
 				} 
 
 				if (Flag && PowerPre >= 3.001f)
@@ -246,7 +249,7 @@ public class Player2 : MonoBehaviour
 					bad.SetActive (true);
 
 					HitPointFunction ();
-					Flag = false;
+						Flag = false; 
 				}
 
 				JudgeF = ObjChild.GetComponent<CircleCollider2D> ().enabled;
@@ -628,9 +631,7 @@ public class Player2 : MonoBehaviour
 						anim.SetBool ("pinch", true);
 						MainSpriteRenderer.sprite = pinch1;
 						state = State.Interpose;
-							//hasamu_se.PlayOneShot(hasamu_se.clip);
-							sources[0].Play();
-
+						sources[0].Play();
 					} 
 					else 
 					{
