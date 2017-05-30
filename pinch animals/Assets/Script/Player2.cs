@@ -113,6 +113,11 @@ public class Player2 : MonoBehaviour
 
 	bool pinchFlag;
 
+	private AudioSource hasamu_se;
+	private AudioSource nuku_se;
+
+	private AudioSource[] sources;
+
 	public enum State
 	{
 		Start,
@@ -185,6 +190,13 @@ public class Player2 : MonoBehaviour
 		nextTime = Time.time;
 
 		pinchFlag = false;
+
+		//AudioSourceコンポーネントを取得し、変数に格納
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		//hasamu_se = audioSources[0];
+		//nuku_se = audioSources[1];
+
+		sources = gameObject.GetComponents<AudioSource>();
 	}
 
 	void ObjInit()
@@ -616,6 +628,9 @@ public class Player2 : MonoBehaviour
 						anim.SetBool ("pinch", true);
 						MainSpriteRenderer.sprite = pinch1;
 						state = State.Interpose;
+							//hasamu_se.PlayOneShot(hasamu_se.clip);
+							sources[0].Play();
+							sources[1].Play();
 					} 
 					else 
 					{
